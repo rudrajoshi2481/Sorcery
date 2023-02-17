@@ -4,17 +4,19 @@ const {AuthMiddleware} =  require("./middleware/authmiddleware");
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
-
+app.use(cors({origin: true, credentials: true}));
 app.get("/", (req, res) => {
-  res.send("Hello my World,😘 !");
+  // console.log("Hello world");
+  
+  res.send("Hello my World,😘 !").status(200);
+  
 });
 
 app.get("/dock", AuthMiddleware, require("./routes/docking"));
 
 app.use("/auth", require("./routes/login"));
 
-app.listen(6000, () => {
-  console.log("App started on 6000");
+app.listen(2000, () => {
+  console.log("App started on 2000");
 });

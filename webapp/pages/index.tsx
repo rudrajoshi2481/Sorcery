@@ -1,3 +1,6 @@
+import { helloWorld, userlogin } from "@/components/config/backendLinks";
+import Footer from "@/components/Footer/Footer";
+import { saveToken } from "@/components/logic/cookie";
 import {
   Box,
   Button,
@@ -7,18 +10,51 @@ import {
   ListItem,
   Text,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState } from "react";
 
-function Index() {
+function Index({props}:any) {
+const toast = useToast()
+  const [IsLoginBtnLoading, setIsLoginBtnLoading] = useState(false)
+
+  const Loginfunction  = ({users}:any) => {
+    setIsLoginBtnLoading(true)
+    console.log(users);
+    
+    axios.post(userlogin,{...users}).then(res => {
+      saveToken(res.data.token)
+      toast({
+        title:"Login success",
+        description:"you are now loged in",
+        status:"success"
+      })
+    }).catch(err => {
+      console.log(err);
+      toast({
+        title:"Login failure",
+        description:"facing issues",
+        status:"error"
+      })
+    })
+
+    setIsLoginBtnLoading(false)
+
+
+
+    
+  }
+
+
   const [Accounts, setAccounts] = useState([
-    { name: "Bheem", emailId: "bheem@sorcery.com", passowrd: "15236544654" },
-    { name: "Raju", emailId: "raju@sorcery.com", passowrd: "15236544654" },
+    { name: "Bheem", emailId: "bheem@gmail.com", password: "123456" },
+    { name: "Raju", emailId: "raju@gmail.com", password: "123456" },
   ]);
   return (
     <Box>
       <Container maxW={"container.xl"}>
-        <Box>{/* Hero Part */}</Box>
+      
 
         <Box display={"flex"} justifyContent={"space-between"}>
           <Box p="6">
@@ -47,10 +83,10 @@ function Index() {
                         <Heading fontSize={"xl"}>{users.name}</Heading>
                         <Divider />
                         <Text>{users.emailId}</Text>
-                        <Text>{users.passowrd}</Text>
+                        <Text>{users.password}</Text>
                       </Box>
                       <Box>
-                        <Button variant={"outline"} colorScheme="green">
+                        <Button onClick={e => Loginfunction({users})} isLoading={IsLoginBtnLoading} variant={"outline"} colorScheme="green">
                           Login
                         </Button>
                       </Box>
@@ -62,6 +98,7 @@ function Index() {
           </Box>
         </Box>
       </Container>
+      <Footer />
     </Box>
   );
 }

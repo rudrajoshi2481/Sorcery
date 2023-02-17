@@ -12,9 +12,18 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LOGO from "../../public/logo.svg";
+import { getToken } from "../logic/cookie";
 function Navbar() {
+  
+  const [ShowLogin, setShowLogin] = useState(false)
+  useEffect(() => {
+    let isThereToken = getToken()
+    setShowLogin(isThereToken ? true : false)
+  },[])
+
+
   const listItem = [
     {
       name: "Products",
@@ -59,9 +68,11 @@ function Navbar() {
       ],
     },
   ];
-  return (
+  return (<>
+    {ShowLogin  ? <Box style={{width:"100vw"}} bgColor="green.400" textAlign={"center"}>you are loged in</Box> : null}
     <Box position={"sticky"} top="0" bgColor={"white"}  zIndex={"1"}  px="5" py="3" display={"flex"} alignItems="center" justifyContent={"space-between"}>
       {/* <Heading><LOGO /></Heading> */}
+
       <Box display={"flex"} alignItems="center">
         <Box >
           <Link href="/"><Image src={"./logo.svg"} width="60" height="60" alt={"logo"} /></Link>
@@ -75,12 +86,12 @@ function Navbar() {
       </Box>
       {/* Righ Hand side */}
       <Box>
-      
+          
         <Link href="https://github.com/rudrajoshi2481/Sorcery"><Code colorScheme={"gray"} p="2" mr="3" border="1px solid black">⭐ Github</Code></Link>
         <Link href="/login"><Button colorScheme={"green"} variant="outline" >Get Started</Button></Link>
       </Box>
     </Box>
-  );
+  </>);
 }
 
 const ListItemComponent = ({ item }: any) => {

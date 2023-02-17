@@ -7,10 +7,10 @@ function Login() {
   return (
     <Container display={"flex"} justifyContent="center" alignItems={"center"}  flexDir="column">
 
-        <Box mb="6">
+        <Box mb="6" >
         <Image src="./logo.svg" width="100" height={"100"} alt="logo" />
         </Box>
-      <Box border="1px solid black" display={"flex"} justifyContent="center" minW={"450"}>
+      <Box  border="1px solid black" display={"flex"} justifyContent="center" minW={"450"}>
         <Box p="9" >
           <FormControl p="6" >
             <FormLabel >Email :</FormLabel>
