@@ -30,27 +30,31 @@ function Index() {
               type and scrambled it to make a type specimen book.
             </Text>
           </Box>
-          <Box p="6" minW={"450"} >
-            
-            <UnorderedList border="1px solid black" p="6">
+          <Box p="6" minW={"450"}>
+            <UnorderedList border="1px solid black" borderRadius={"10"} p="6">
               {Accounts.map((users) => {
                 return (
                   <>
-                  
-                  <ListItem p="2" display={"flex"} justifyContent="space-between" alignItems={"Center"} m="2" listStyleType={"none"}>
-                    <Box>
-                      <Heading fontSize={"xl"}>{users.name}</Heading>
-                      <Divider />
-                      <Text>{users.emailId}</Text> 
-                      <Text>{users.passowrd}</Text>
-                    </Box>
-                    <Box>
-                      <Button variant={"outline"} colorScheme="green">Login</Button>
-                    </Box>
-                  </ListItem>
-                  
-                  
-                  
+                    <ListItem
+                      p="2"
+                      display={"flex"}
+                      justifyContent="space-between"
+                      alignItems={"Center"}
+                      m="2"
+                      listStyleType={"none"}
+                    >
+                      <Box>
+                        <Heading fontSize={"xl"}>{users.name}</Heading>
+                        <Divider />
+                        <Text>{users.emailId}</Text>
+                        <Text>{users.passowrd}</Text>
+                      </Box>
+                      <Box>
+                        <Button variant={"outline"} colorScheme="green">
+                          Login
+                        </Button>
+                      </Box>
+                    </ListItem>
                   </>
                 );
               })}

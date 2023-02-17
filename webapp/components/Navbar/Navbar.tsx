@@ -22,7 +22,7 @@ function Navbar() {
         {
           name: "SorceryDock",
           icons: "",
-          link: "",
+          link: "/docking",
           description:
             "Dock more than 20,000 ligand in one click can save you thousands of years",
         },
@@ -60,11 +60,11 @@ function Navbar() {
     },
   ];
   return (
-    <Box  px="5" py="3" display={"flex"} alignItems="center" justifyContent={"space-between"}>
+    <Box position={"sticky"} top="0" bgColor={"white"}  zIndex={"1"}  px="5" py="3" display={"flex"} alignItems="center" justifyContent={"space-between"}>
       {/* <Heading><LOGO /></Heading> */}
       <Box display={"flex"} alignItems="center">
         <Box >
-          <Image src={"./logo.svg"} width="60" height="60" alt={"logo"} />
+          <Link href="/"><Image src={"./logo.svg"} width="60" height="60" alt={"logo"} /></Link>
         </Box>
 
         <UnorderedList display={"flex"}>
@@ -75,9 +75,9 @@ function Navbar() {
       </Box>
       {/* Righ Hand side */}
       <Box>
-        
-        <Code colorScheme={"gray"} p="2" mr="3" border="1px solid black">⭐ Github</Code>
-        <Button colorScheme={"green"} variant="outline">Get Started</Button>
+      
+        <Link href="https://github.com/rudrajoshi2481/Sorcery"><Code colorScheme={"gray"} p="2" mr="3" border="1px solid black">⭐ Github</Code></Link>
+        <Link href="/login"><Button colorScheme={"green"} variant="outline" >Get Started</Button></Link>
       </Box>
     </Box>
   );
@@ -91,6 +91,7 @@ const ListItemComponent = ({ item }: any) => {
       my="3"
       onMouseEnter={(e) => setIsHovering(true)}
       onMouseLeave={(e) => setIsHovering(false)}
+      zIndex={"1"}
     >
       <Text fontWeight={"medium"}>{item.name}</Text>
       <Box my="3">
@@ -126,7 +127,7 @@ const SubLinkComponent = ({ sublinks }: any) => {
                   onMouseEnter={(e) => {
                     setdispalyText(subItem.description);
                   }}
-                  href={"#"}
+                  href={subItem.link}
                 >
                   <ListItem
                     _hover={{ bgColor: "green.400" }}
