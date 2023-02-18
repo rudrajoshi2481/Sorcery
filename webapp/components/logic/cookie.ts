@@ -8,3 +8,8 @@ export const getToken  =  () => {
     let token = window.localStorage.getItem("token")
     return token
 }
+
+export const logOut = () => {
+    window.localStorage.removeItem("token")
+    return true
+}

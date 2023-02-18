@@ -1,3 +1,4 @@
+import { helloWorld } from "@/components/config/backendLinks";
 import {
   Box,
   Button,
@@ -9,17 +10,27 @@ import {
   GridItem,
   Heading,
   Input,
+  Skeleton,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import Link from "next/link";
 import React from "react";
-
+import { useQuery } from "react-query";
 // fetch all projects
 
 // project : title,description,body,protein serch history,all ligand uploaded,all out ligands
+const fetchProjects = () => {
+  axios.get(helloWorld);
+};
 
 function Docking() {
+  const { isLoading, error, data, isError } = useQuery(
+    "projects",
+    fetchProjects
+  );
+
   return (
     <Box p="3">
       <Box mb="6" display={"flex"} maxW={"350"}>
@@ -30,50 +41,69 @@ function Docking() {
       <Box border={"1px solid grey"} p="6">
         <Box display={"flex"} justifyContent="space-between">
           <Heading className="title">Projects</Heading>
-          
+
           <Link href="/docking/create-new-project">
-          <Button colorScheme={"green"} variant={"outline"}>
-            Create New Project
-          </Button>
+            <Button colorScheme={"green"} variant={"outline"}>
+              Create New Project
+            </Button>
           </Link>
         </Box>
 
-        <Flex flexWrap={"wrap"}>
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-            <ProjectsCards />
-          
-        </Flex>
-        
+        {!true ? (
+          <LoadingProjects />
+        ) : (
+          <Flex flexWrap={"wrap"}>
+            <ProjectsCards
+              projectId={"1234"}
+              description=" you will be suprised, this is the one of the best description text of my life"
+              title={"Triple Negative Breast cancer"}
+              createdAt={"08/04/2001"}
+            />
+          </Flex>
+        )}
       </Box>
     </Box>
   );
 }
 
-function ProjectsCards() {
+const LoadingProjects = () => {
   return (
-    
-    <Card maxW={"350"} minW="350" p="3" m="6" border={"1px solid green"} _hover={{cursor:"grab"}}>
+    <Stack mt="9" maxW={"350"}>
+      <Skeleton height="20px" />
+      <Skeleton height="20px" />
+      <Skeleton height="20px" />
+      <Skeleton height="20px" />
+      <Skeleton height="20px" />
+      <Skeleton height="20px" />
+    </Stack>
+  );
+};
+
+function ProjectsCards({ projectId, description, title, createdAt }: any) {
+  return (
+    <Link href={`/docking/${projectId}`}>
+    <Card
+      maxW={"350"}
+      minW="350"
+      p="3"
+      m="6"
+      border={"1px solid green"}
+      _hover={{ cursor: "grab" }}
+    >
       <Stack>
         <CardBody>
-          <Heading>Project title</Heading>
+          <Heading>{title}</Heading>
           <Text py="3" color="grey">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {description}
           </Text>
           <Divider />
-          <Box><Text py="3">created At: 08/04/2001</Text></Box>
+          <Box>
+            <Text py="3">created At: {createdAt}</Text>
+          </Box>
         </CardBody>
       </Stack>
     </Card>
-    
+    </Link>
   );
 }
 

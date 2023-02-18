@@ -16,13 +16,11 @@ import React, { useEffect, useState } from "react";
 import LOGO from "../../public/logo.svg";
 import { getToken } from "../logic/cookie";
 function Navbar() {
-  
-  const [ShowLogin, setShowLogin] = useState(false)
+  const [ShowLogin, setShowLogin] = useState(false);
   useEffect(() => {
-    let isThereToken = getToken()
-    setShowLogin(isThereToken ? true : false)
-  },[])
-
+    let isThereToken = getToken();
+    setShowLogin(isThereToken ? true : false);
+  }, []);
 
   const listItem = [
     {
@@ -68,30 +66,64 @@ function Navbar() {
       ],
     },
   ];
-  return (<>
-    {ShowLogin  ? <Box style={{width:"100vw"}} bgColor="green.400" textAlign={"center"}>you are loged in</Box> : null}
-    <Box position={"sticky"} top="0" bgColor={"white"}  zIndex={"1"}  px="5" py="3" display={"flex"} alignItems="center" justifyContent={"space-between"}>
-      {/* <Heading><LOGO /></Heading> */}
-
-      <Box display={"flex"} alignItems="center">
-        <Box >
-          <Link href="/"><Image src={"./logo.svg"} width="60" height="60" alt={"logo"} /></Link>
+  return (
+    <>
+      {ShowLogin ? (
+        <Box>
+          <Box
+          style={{ width: "100vw" }}
+          bgColor="green.400"
+          textAlign={"center"}
+        >
+          you are loged in
         </Box>
-
-        <UnorderedList display={"flex"}>
-          {listItem.map((item) => {
-            return <ListItemComponent item={item} />;
-          })}
-        </UnorderedList>
-      </Box>
-      {/* Righ Hand side */}
-      <Box>
+        <Box>
           
-        <Link href="https://github.com/rudrajoshi2481/Sorcery"><Code colorScheme={"gray"} p="2" mr="3" border="1px solid black">⭐ Github</Code></Link>
-        <Link href="/login"><Button colorScheme={"green"} variant="outline" >Get Started</Button></Link>
+        </Box>
+        </Box>
+      ) : null}
+      <Box
+        position={"sticky"}
+        top="0"
+        bgColor={"white"}
+        zIndex={"1"}
+        px="5"
+        py="3"
+        display={"flex"}
+        alignItems="center"
+        justifyContent={"space-between"}
+      >
+        {/* <Heading><LOGO /></Heading> */}
+
+        <Box display={"flex"} alignItems="center">
+          <Box>
+            <Link href="/">
+              <Image src={"./logo.svg"} width="60" height="60" alt={"logo"} />
+            </Link>
+          </Box>
+
+          <UnorderedList display={"flex"}>
+            {listItem.map((item) => {
+              return <ListItemComponent item={item} />;
+            })}
+          </UnorderedList>
+        </Box>
+        {/* Righ Hand side */}
+        <Box>
+          <Link href="https://github.com/rudrajoshi2481/Sorcery">
+            <Code colorScheme={"gray"} p="2" mr="3" border="1px solid black">
+              ⭐ Github
+            </Code>
+          </Link>
+          <Link href="/login">
+            <Button colorScheme={"green"} variant="outline">
+              Get Started
+            </Button>
+          </Link>
+        </Box>
       </Box>
-    </Box>
-  </>);
+    </>
+  );
 }
 
 const ListItemComponent = ({ item }: any) => {
@@ -119,15 +151,14 @@ const SubLinkComponent = ({ sublinks }: any) => {
 
   return (
     <Box
-    border={"1px solid black"}
-    display={"flex"}
-    position={"absolute"}
-    maxW="850"
-    bg={"white"}
-    maxH={"250"}
-    py="3"
-    borderRadius={"10"}
-    
+      border={"1px solid black"}
+      display={"flex"}
+      position={"absolute"}
+      maxW="850"
+      bg={"white"}
+      maxH={"250"}
+      py="3"
+      borderRadius={"10"}
     >
       <Box borderRight={"1px solid grey"}>
         <UnorderedList display={"flex"} flexDir="column">
