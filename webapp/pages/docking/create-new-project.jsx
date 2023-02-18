@@ -8,8 +8,12 @@ import {
   Heading,
   Input,
   Textarea,
+  Tooltip,
 } from "@chakra-ui/react";
+import {useRouter} from "next/router"
 function Createnewproject() {
+
+  const route = useRouter()
   return (
     <Box
       p="6"
@@ -18,9 +22,12 @@ function Createnewproject() {
       flexDir={"column"}
       alignItems="center"
     >
-      <Heading pb="3" className="title">
+      <Box pb="3" display={"flex"} alignItems="flex-start">
+      <Tooltip label="Go Back"><Button onClick={e => {route.back()} } fontSize={"32"} variant="ghost">{"<"}</Button></Tooltip>
+      <Heading   className="title">
         Create New Project
       </Heading>
+      </Box>
       <Divider />
       <Box mt="6" p="9" minW={"1080"} border="1px solid black" display="flex" flexDir={"row"}>
         <Box flex="1" maxW={"500"} >

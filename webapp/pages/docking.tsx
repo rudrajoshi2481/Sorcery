@@ -1,4 +1,6 @@
 import { helloWorld } from "@/components/config/backendLinks";
+import LoginRequired from "@/components/ErrorStatus/LoginRequired";
+import { getToken } from "@/components/logic/cookie";
 import {
   Box,
   Button,
@@ -16,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 // fetch all projects
 
@@ -31,38 +33,52 @@ function Docking() {
     fetchProjects
   );
 
+  const [IsUserLogedIn, setIsUserLogedIn] = useState(false);
+
+  useEffect(() => {
+    
+      if (getToken()) {
+        setIsUserLogedIn(true);
+      }
+    
+  }, []);
+
   return (
-    <Box p="3">
-      <Box mb="6" display={"flex"} maxW={"350"}>
-        <Input placeholder="search for project" />
-        <Button>🔍</Button>
-      </Box>
-      <Divider />
-      <Box border={"1px solid grey"} p="6">
-        <Box display={"flex"} justifyContent="space-between">
-          <Heading className="title">Projects</Heading>
-
-          <Link href="/docking/create-new-project">
-            <Button colorScheme={"green"} variant={"outline"}>
-              Create New Project
-            </Button>
-          </Link>
-        </Box>
-
-        {!true ? (
-          <LoadingProjects />
-        ) : (
-          <Flex flexWrap={"wrap"}>
-            <ProjectsCards
-              projectId={"1234"}
-              description=" you will be suprised, this is the one of the best description text of my life"
-              title={"Triple Negative Breast cancer"}
-              createdAt={"08/04/2001"}
-            />
-          </Flex>
-        )}
-      </Box>
-    </Box>
+    <>
+    {
+      IsUserLogedIn ? <Box p="3">
+       <Box mb="6" display={"flex"} maxW={"350"}>
+         <Input placeholder="search for project" />
+         <Button>🔍</Button>
+       </Box>
+       <Divider />
+       <Box border={"1px solid grey"} p="6">
+         <Box display={"flex"} justifyContent="space-between">
+           <Heading className="title">Projects</Heading>
+ 
+           <Link href="/docking/create-new-project">
+             <Button colorScheme={"green"} variant={"outline"}>
+               Create New Project
+             </Button>
+           </Link>
+         </Box>
+ 
+         {!true ? (
+           <LoadingProjects />
+         ) : (
+           <Flex flexWrap={"wrap"}>
+             <ProjectsCards
+               projectId={"1234"}
+               description=" you will be suprised, this is the one of the best description text of my life"
+               title={"Triple Negative Breast cancer"}
+               createdAt={"08/04/2001"}
+             />
+           </Flex>
+         )}
+       </Box>
+     </Box> : <LoginRequired />
+    }
+    </>
   );
 }
 
