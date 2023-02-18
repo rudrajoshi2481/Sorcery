@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import Dashboard from "../../components/dashboard/index";
 import LoginRequired from "@/components/ErrorStatus/LoginRequired";
 import { getToken } from "@/components/logic/cookie";
+import ConfigComponent from "@/components/dashboard/panels/ConfigsComponent";
 
 function ProjectId() {
   const [IsUserLogedIn, setIsUserLogedIn] = useState(true);
@@ -69,7 +70,7 @@ const TabsPanelComponent = () => {
             <p>two!</p>
           </TabPanel>
           <TabPanel>
-            <p>three!</p>
+            <ConfigComponent />
           </TabPanel>
           <TabPanel>
             <p>Playground!</p>
