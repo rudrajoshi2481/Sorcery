@@ -12,7 +12,7 @@ function Index() {
 const Activities = () => {
     return (
         <Box borderRadius={"10"} border={"1px solid green"} p="6">
-            <Heading fontSize={"xl"}>Last Activity</Heading>
+            <Heading fontSize={"xl"}>Current Activity Logs</Heading>
         </Box>
     )
 }

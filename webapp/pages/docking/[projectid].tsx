@@ -39,6 +39,7 @@ function ProjectId() {
           <RoutingBar
             title={"Triple Negative Breast Cancer"}
             createdAt={"08/04/2001"}
+            description={" you will be suprised, this is the one of the best description text of my life ..."}
           />
           <TabsPanelComponent />
         </Box>
@@ -57,6 +58,7 @@ const TabsPanelComponent = () => {
           <Tab>Dashboard</Tab>
           <Tab>Sorcery</Tab>
           <Tab>Configs</Tab>
+          <Tab>Playground</Tab>
         </TabList>
 
         <TabPanels>
@@ -69,13 +71,16 @@ const TabsPanelComponent = () => {
           <TabPanel>
             <p>three!</p>
           </TabPanel>
+          <TabPanel>
+            <p>Playground!</p>
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </Box>
   );
 };
 
-const RoutingBar = ({ title, createdAt }: any) => {
+const RoutingBar = ({ title, createdAt,description }: any) => {
   const route = useRouter();
 
   return (
@@ -91,6 +96,7 @@ const RoutingBar = ({ title, createdAt }: any) => {
       </Tooltip>
       <VStack px="9" alignItems={"flex-start"}>
         <Heading className="title">{title}</Heading>
+        <Text color="grey">{description}</Text>
         <HStack justifyContent={"space-between"}>
           <HStack>
             <Text>Started date : </Text>
