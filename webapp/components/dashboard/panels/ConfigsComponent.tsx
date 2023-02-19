@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   FormControl,
   FormLabel,
@@ -11,12 +12,13 @@ import React from "react";
 
 function Configs() {
   return (
-    <Box>
+      <>
       <Text color={"gray"}>
         {"⭐"} To change the values of autodock config file, this configs will
         be based on the files & folders already present in server (docker
         container)
       </Text>
+    <Box display={"flex"}>
       <Box border={"1px solid black"} mt="6" p="6" maxW={"800"}>
         <FormControl >
           <HStack mb="2" alignItems={"center"}>
@@ -95,9 +97,17 @@ function Configs() {
               <Input mb="2" placeholder="10" />
             </Box>
           </HStack>
+          <Box mt="3" display={"flex"} justifyContent={"flex-end"} >
+            <Button mr="3" color="tomato" variant="ghost">reset</Button>
+            <Button colorScheme={"green"} variant="outline">Save Config</Button>
+          </Box>
         </FormControl>
       </Box>
+      <Box mt="6" px="32">
+        Other configs
+      </Box>
     </Box>
+      </>
   );
 }
 

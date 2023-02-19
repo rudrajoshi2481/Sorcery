@@ -1,18 +1,32 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Divider, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 
 function Index() {
   return (
     <Box>
-        <Activities />  
+        <Activities />
+        <Divider />
+        {/* <Results /> */}
+    </Box>
+  )
+}
+
+const Results = () => {
+  return (
+    <Box mt="3">
+      <Heading className='title'>Results</Heading>
     </Box>
   )
 }
 
 const Activities = () => {
     return (
-        <Box borderRadius={"10"} border={"1px solid green"} p="6">
-            <Heading fontSize={"xl"}>Current Activity Logs</Heading>
+        <Box >
+            <Text>{"🍕 "}Logs of current activity ...</Text>
+            <Box minH={"350"} display="flex" justifyContent={"center"} flexDir="column">
+            {/* <Heading textAlign={"center"}>😊😉😗😆😄😁😀😙😪</Heading> */}
+            <Heading textAlign={"center"} mt="3" className='title' >😄 No Working Servers</Heading>
+            </Box>
         </Box>
     )
 }
