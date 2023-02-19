@@ -31,7 +31,7 @@ function ProjectId() {
       }
     };
 
-    checkStatus()
+    checkStatus();
   }, []);
 
   return (
@@ -41,7 +41,9 @@ function ProjectId() {
           <RoutingBar
             title={"Triple Negative Breast Cancer"}
             createdAt={"08/04/2001"}
-            description={" you will be suprised, this is the one of the best description text of my life ..."}
+            description={
+              " you will be suprised, this is the one of the best description text of my life ..."
+            }
           />
           <TabsPanelComponent />
         </Box>
@@ -53,9 +55,10 @@ function ProjectId() {
 }
 
 const TabsPanelComponent = () => {
+  
   return (
     <Box mx="9" my="3">
-      <Tabs>
+      <Tabs defaultIndex={1}>
         <TabList>
           <Tab>Dashboard</Tab>
           <Tab>Sorcery</Tab>
@@ -82,7 +85,7 @@ const TabsPanelComponent = () => {
   );
 };
 
-const RoutingBar = ({ title, createdAt,description }: any) => {
+const RoutingBar = ({ title, createdAt, description }: any) => {
   const route = useRouter();
 
   return (
