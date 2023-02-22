@@ -5,17 +5,16 @@ import { helloWorld } from "../config/backendLinks";
 
 function Footer() {
   const [BackendStatus, setBackendStatus] = useState("");
-  const StatusCheck = () => {
+  const StatusCheckNodeServers = () => {
     Axios.get(helloWorld).then((res) => {
       setBackendStatus(res.data);
     }).catch(Err => {
-      
-      
     })
   };
 
-  StatusCheck();
+  StatusCheckNodeServers();
 
+  
   return (
     <Box>
       <Divider />

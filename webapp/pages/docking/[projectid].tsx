@@ -20,6 +20,7 @@ import LoginRequired from "@/components/ErrorStatus/LoginRequired";
 import { getToken } from "@/components/logic/cookie";
 import ConfigComponent from "@/components/dashboard/panels/ConfigsComponent";
 import DockerContainerSorceryComponent from "@/components/dockerConnectionSorcery/Index";
+import Playground from "@/components/dashboard/panels/Playground";
 
 function ProjectId() {
   const [IsUserLogedIn, setIsUserLogedIn] = useState(true);
@@ -77,7 +78,7 @@ const TabsPanelComponent = () => {
             <ConfigComponent />
           </TabPanel>
           <TabPanel>
-            <p>Playground!</p>
+            <Playground />
           </TabPanel>
         </TabPanels>
       </Tabs>

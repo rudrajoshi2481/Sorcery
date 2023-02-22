@@ -25,7 +25,7 @@ const Activities = () => {
             <Text>{"🍕 "}Logs of current activity ...</Text>
             <Box minH={"350"} display="flex" justifyContent={"center"} flexDir="column">
             {/* <Heading textAlign={"center"}>😊😉😗😆😄😁😀😙😪</Heading> */}
-            <Heading textAlign={"center"} mt="3" className='title' >😄 No Servers Working</Heading>
+            <Heading textAlign={"center"} mt="3" className='title' >😄 No Servers Running</Heading>
             </Box>
         </Box>
     )

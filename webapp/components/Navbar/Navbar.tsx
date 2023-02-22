@@ -36,13 +36,13 @@ function Navbar() {
         {
           name: "SorceryBook",
           icons: "",
-          link: "",
+          link: "/#",
           description: "version control for yours latest Sorcery",
         },
         {
           name: "Sorcery Calculator",
           icons: "",
-          link: "",
+          link: "/#",
           description: "know the values of your Sorcery constituents",
         },
       ],
@@ -53,14 +53,14 @@ function Navbar() {
         {
           name: "TNBC",
           icons: "",
-          link: "",
+          link: "/#",
           description:
             "Case study on triple negative breast cancer by - Ankita mam",
         },
         {
           name: "Autodock Automation",
           icons: "",
-          link: "",
+          link: "/#",
           description: "Case study on Automation on Autodock using julia",
         },
       ],

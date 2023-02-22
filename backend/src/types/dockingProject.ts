@@ -7,7 +7,6 @@ export type DockingProject = {
     searchhistory:[],
     uploadedligands:[],
     uploadedproteins:[],
-
 }
 
 export type LigandDoc = {
