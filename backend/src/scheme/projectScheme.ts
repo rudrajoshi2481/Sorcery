@@ -3,7 +3,8 @@ import  mongoose, {Schema} from "mongoose"
 const projectSchema = new Schema({
     title:{
         type:String,
-        require:true
+        require:true,
+        unique:true
     },
     description:{
         type:String,
@@ -20,7 +21,15 @@ const projectSchema = new Schema({
     lastOnline:{
         type:Number,
         require:true
-    }
+    },
+    share:{
+        type:Array,
+        require:false
+    },
 })
 
-module.exports  = mongoose.model("projects",projectSchema)
+const ProjectSchema = mongoose.model("projects",projectSchema)
+
+// module.exports = ProjectSchema
+
+export default ProjectSchema

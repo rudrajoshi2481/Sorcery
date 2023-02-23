@@ -4,12 +4,12 @@ import mongoose from "mongoose";
 const { AuthMiddleware } = require("./middleware/authmiddleware");
 
 mongoose
-  .connect("mongodb://localhost:9000/")
+  .connect("mongodb://localhost:9000/sorcery")
   .then((res) => {
     console.log("Connected to database");
   })
   .catch((Err) => {
-    console.log("Error Connecting to databaes");
+    console.log("Error Connecting to database");
   });
 
 const app = express();
@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
   res.send("Hello my World,😘 !").status(200);
 });
 
-app.get("/dock", AuthMiddleware, require("./routes/docking"));
+app.use("/dock", AuthMiddleware, require("./routes/docking"));
 
 
 app.use("/auth", require("./routes/login"));

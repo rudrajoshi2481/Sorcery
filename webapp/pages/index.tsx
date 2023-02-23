@@ -1,4 +1,8 @@
-import { helloWorld, userlogin } from "@/components/config/backendLinks";
+import {
+  helloWorld,
+  loginuser,
+  userlogin,
+} from "@/components/config/backendLinks";
 import Footer from "@/components/Footer/Footer";
 import { getToken, logOut, saveToken } from "@/components/logic/cookie";
 import {
@@ -14,10 +18,10 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
 function Index({ props }: any) {
   const toast = useToast();
-  const route = useRouter()
+  const route = useRouter();
 
   const [IsLoginBtnLoading, setIsLoginBtnLoading] = useState(false);
 
@@ -28,22 +32,25 @@ function Index({ props }: any) {
     if (token) setshowLogoutBtn(true);
   }, []);
 
-  const Loginfunction = ({ users }: any) => {
+  const Loginfunction = ({ email, password }: any) => {
     setIsLoginBtnLoading(true);
-    console.log(users);
+    // console.log(users);
 
     axios
-      .post(userlogin, { ...users })
+      .post(loginuser, { email, password })
       .then((res) => {
-        saveToken(res.data.token);
-        toast({
-          title: "Login success",
-          description: "you are now loged in",
-          status: "success",
-          position:"top-right"
-        });
-      }).then(() => {
-        route.reload()
+        if (res.data.token) {
+          saveToken(res.data.token);
+          toast({
+            title: "Login success",
+            description: "you are now loged in",
+            status: "success",
+            position: "top-right",
+          });
+        }
+      })
+      .then(() => {
+        route.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -57,8 +64,8 @@ function Index({ props }: any) {
   };
 
   const [Accounts, setAccounts] = useState([
-    { name: "Bheem", emailId: "bheem@gmail.com", password: "123456" },
-    { name: "Raju", emailId: "raju@gmail.com", password: "123456" },
+    { name: "Bheem", emailId: "bheem@gmail.com", password: "bheem@123" },
+    { name: "Raju", emailId: "raju@gmail.com", password: "raju@123" },
   ]);
   return (
     <Box>
@@ -77,7 +84,7 @@ function Index({ props }: any) {
                 colorScheme={"green"}
                 onClick={(e) => {
                   logOut();
-                  route.reload()
+                  route.reload();
                 }}
               >
                 Logout
@@ -105,7 +112,12 @@ function Index({ props }: any) {
                       </Box>
                       <Box>
                         <Button
-                          onClick={(e) => Loginfunction({ users })}
+                          onClick={(e) =>
+                            Loginfunction({
+                              email: users.emailId,
+                              password: users.password,
+                            })
+                          }
                           isLoading={IsLoginBtnLoading}
                           variant={"outline"}
                           colorScheme="green"
