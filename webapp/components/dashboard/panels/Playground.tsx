@@ -1,8 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 
 function Playground() {
+
 
   const [ShowPlayGorund, setShowPlayGorund] = useState(false)
 
@@ -14,11 +15,10 @@ function Playground() {
     <Box>
       <Text>Playgroung</Text>
 
-      {/* <pdbe-molstar molecule-id="1cbs"></pdbe-molstar> */}
-      {/* <Molstar pdbId="1LOL" /> */}
+     
       {
-        ShowPlayGorund ? <Box mb="16" height={"600"} position="relative">
-        <Fold molecule-id="7aad" bg-color-r="255" bg-color-g="255" bg-color-b="255" validation-annotation="false"/>
+        ShowPlayGorund ? <Box mb="16" height={"700"} position="relative">
+        <Fold  molecule-id="7aad"  bg-color-r="255" bg-color-g="255" bg-color-b="255" landscape="true" validation-annotation="false"/>
         </Box> : null
       }
     </Box>
@@ -34,8 +34,10 @@ function Playground() {
 
 const Fold = (props:any) => React.createElement(
     "pdbe-molstar",
+    
     props,
-    [props.children]
+    [props.children],
+    
   )
 
 

@@ -72,13 +72,13 @@ Router.post("/loginuser", (req, res) => {
         password: password
     }).then((doc) => __awaiter(void 0, void 0, void 0, function* () {
         if (!doc) {
-            console.log("message");
-            res.send({ status: 400, msg: "invalid token" });
+            console.log("not valid email  ");
+            return res.send({ status: 400, msg: "invalid token" });
         }
         console.log("find one ");
         console.log(doc);
         let token = yield loginMain(doc);
-        res.send({ status: 200, token, email: doc === null || doc === void 0 ? void 0 : doc.email });
+        res.send({ status: 200, token, email: doc === null || doc === void 0 ? void 0 : doc.email, uuid: doc.uuid });
     }));
 });
 module.exports = Router;

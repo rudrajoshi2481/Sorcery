@@ -73,13 +73,13 @@ Router.post("/loginuser", (req, res) => {
     password:password
   }).then(async (doc) => {
     if (!doc) {
-      console.log("message");
-      res.send({ status: 400, msg: "invalid token" });
+      console.log("not valid email  ");
+      return res.send({ status: 400, msg: "invalid token" });
     }
     console.log("find one ");
     console.log(doc);
     let token = await loginMain(doc);
-    res.send({status:200,token,email:doc?.email})
+    res.send({status:200,token,email:doc?.email,uuid:doc.uuid})
   });
 });
 

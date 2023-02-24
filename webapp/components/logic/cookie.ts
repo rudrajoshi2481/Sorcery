@@ -1,15 +1,15 @@
-export const saveToken = (token:any) => {
-    window.localStorage.setItem("token",token)
+export const saveToken = (doc:any) => {
+    window.localStorage.setItem("UserData",JSON.stringify(doc))
     
     
 }
 
 export const getToken  =  () => {
-    let token = window.localStorage.getItem("token")
-    return token
+    let userData:any = window.localStorage.getItem("UserData")
+    return JSON.parse(userData)
 }
 
 export const logOut = () => {
-    window.localStorage.removeItem("token")
+    window.localStorage.removeItem("UserData")
     return true
 }

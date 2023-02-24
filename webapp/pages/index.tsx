@@ -40,7 +40,7 @@ function Index({ props }: any) {
       .post(loginuser, { email, password })
       .then((res) => {
         if (res.data.token) {
-          saveToken(res.data.token);
+          saveToken(res.data);
           toast({
             title: "Login success",
             description: "you are now loged in",

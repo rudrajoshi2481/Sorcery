@@ -6,15 +6,18 @@ import Head from "next/head";
 import "../styles/globals.css"
 import { QueryClientProvider } from "react-query";
 import { QueryClient } from "react-query";
+import { UserContextProvider } from "@/context/Usercontext";
 
 const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
+  return (<UserContextProvider>
+    
     
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
       <Head>
+      <link rel="icon" href="./logo.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -48,5 +51,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       </ QueryClientProvider>
     </ChakraProvider>
-  );
+  
+  </UserContextProvider>);
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Button,
@@ -9,9 +9,58 @@ import {
   Input,
   Textarea,
   Tooltip,
+  useToast,
 } from "@chakra-ui/react";
 import {useRouter} from "next/router"
+import Axios from "axios"
+import {createdocproject} from "../../components/config/backendLinks"
+import {UserContext} from "../../context/Usercontext"
 function Createnewproject() {
+const [UserData,setUserData] = useContext(UserContext)
+const toast = useToast()
+const router = useRouter()
+
+  const [FormData, setFormData] = useState({
+    title:"sowthing",
+    description:"sowthing",
+    share:"sowthing",
+    body:"sowthing",
+    uuid:UserData.uuid,
+    token:UserData.token
+  })
+
+
+  const createProjectHandler = () => {
+    Axios.post(createdocproject,{...FormData}).then(doc => {
+      console.log(doc,"Create Project");
+      if (doc.data.status === 400) {
+        return toast({
+          title:"Error creating Project",
+          description:doc.data.msg,
+          status:"error",
+          colorScheme:true
+        })
+      }
+      
+      router.back()
+      
+      toast({
+        title:"Project Created ",
+        description:doc.data.msg,
+        status:"success",
+        colorScheme:true
+      })
+
+    }).catch(err => {
+      // console.log(err);
+      return toast({
+        title:"Server not found",
+        description:err,
+        status:"error",
+        colorScheme:true
+      })
+    })
+  }
 
   const route = useRouter()
   return (
@@ -24,7 +73,7 @@ function Createnewproject() {
     >
       <Box pb="3" display={"flex"} alignItems="flex-start">
       <Tooltip label="Go Back"><Button onClick={e => {route.back()} } fontSize={"32"} variant="ghost">{"<"}</Button></Tooltip>
-      <Heading   className="title">
+      <Heading   className="title" >
         Create New Project
       </Heading>
       </Box>
@@ -33,21 +82,21 @@ function Createnewproject() {
         <Box flex="1" maxW={"500"} >
           <FormControl>
             <FormLabel>Project Title</FormLabel>
-            <Input mb="3" placeholder="Project title" />
+            <Input mb="3" onChange={e => setFormData({...FormData,title:e.target.value})} placeholder="Project title" />
 
             <FormLabel>Description</FormLabel>
-            <Input mb="3" placeholder="Description" />
+            <Input mb="3" placeholder="Description" onChange={e => setFormData({...FormData,description:e.target.value})}/>
 
             <FormLabel>Body</FormLabel>
-            <Textarea mb="3" placeholder="body" />
+            <Textarea mb="3" placeholder="body" onChange={e => setFormData({...FormData,body:e.target.value})}/>
 
             <FormLabel>Share with</FormLabel>
-            <Textarea mb="3" placeholder="@raju @jaggu" />
+            <Textarea mb="3" placeholder="@raju @jaggu" onChange={e => setFormData({...FormData,share:e.target.value.split("@")})}/>
 
-            <Button mt="3" mr="3" color={"tomato"} variant="ghost">
+            <Button onClick={e => setFormData("")} mt="3" mr="3" color={"tomato"} variant="ghost">
               Reset
             </Button>
-            <Button mt="3" colorScheme={"green"} variant="outline">
+            <Button mt="3" colorScheme={"green"} onClick={e => createProjectHandler()} variant="outline">
               Create Docking Project
             </Button>
           </FormControl>

@@ -4,19 +4,23 @@ const projectSchema = new Schema({
     title:{
         type:String,
         require:true,
-        unique:true
     },
     description:{
         type:String,
         require:true
+    },
+    body:{
+        type:String,
+        
     },
     createdAt:{
         type:Number,
         require:true
     },
     createdBy:{
-        type:Number,
-        require:true
+        type:String,
+        require:true,
+        
     },
     lastOnline:{
         type:Number,

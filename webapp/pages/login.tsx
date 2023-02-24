@@ -14,11 +14,12 @@ import {
 import  Axios  from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import IsEmail from "validator/lib/isEmail";
 import IsStrongPassword from "validator/lib/isStrongPassword";
 import { getToken, logOut, saveToken } from "@/components/logic/cookie";
 import { createuser, loginuser } from "@/components/config/backendLinks";
+import { UserContext } from "@/context/Usercontext";
 
 function Login() {
   return (
@@ -43,6 +44,8 @@ const Form = () => {
   const [warningPassword, setWarningPassword] = useState("");
   const [IsLoading, setIsLoading] = useState(false)
 
+  const [UserData,setUserData]:any = useContext(UserContext) 
+
   const toast = useToast() 
 
   const SubmitData = (e:any) => {
@@ -64,7 +67,8 @@ const Form = () => {
     Axios.post(createuser,{email:Email,password:password,token}).then(doc => {
       console.log(doc);
       if (doc.data.status != 400) {
-        saveToken(doc.data.token)
+        saveToken(doc.data)
+        
         toast({
           title:"Account Created 😀",
           isClosable:true,
