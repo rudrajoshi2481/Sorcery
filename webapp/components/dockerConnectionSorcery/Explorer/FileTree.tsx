@@ -12,39 +12,40 @@ import { BsFileText, BsFolder2 } from "react-icons/bs";
 import { AiOutlineDown } from "react-icons/ai";
 import { isValidMotionProp, motion } from "framer-motion";
 const FileTree = () => {
+  const [SessionsList, setSessionsList] = useState([]);
+
   return (
     <Box minH={"300"} pr="6">
+      <Text fontWeight={"bold"}>All Sessions</Text>
       <UnorderedList minW={"300"}>
-        <ListItem listStyleType={"none"} p="1" px="3">
-          <File name="work 01" />
-        </ListItem>
-        <ListItem listStyleType={"none"} p="1" px="3">
-          <File name="work 01" />
-        </ListItem>
-        <ListItem listStyleType={"none"} p="1" px="3">
-          <File name="work 01" />
-        </ListItem>
-        <ListItem listStyleType={"none"} p="1" px="3">
-          <Folder name="work 01" />
-        </ListItem>
-        <ListItem listStyleType={"none"} p="1" px="3">
-          <Folder name="work 01" />
-        </ListItem>
-        <ListItem listStyleType={"none"} p="1" px="3">
-          <Folder name="work 01" />
-        </ListItem>
+        {SessionsList.length <= 0 ? (
+          <Text color={"tomato"}>No Sessions found</Text>
+        ) : (
+          <>
+            {" "}
+            <ListItem listStyleType={"none"} p="1" px="3">
+              <Folder name="Olaparib base" />
+            </ListItem>
+            <ListItem listStyleType={"none"} p="1" px="3">
+              <Folder name="flavonoid based" />
+            </ListItem>
+            <ListItem listStyleType={"none"} p="1" px="3">
+              <Folder name="work 01" />
+            </ListItem>
+          </>
+        )}
       </UnorderedList>
     </Box>
   );
 };
 
-const File = ({ name }: any) => {
-  return (
-    <HStack pt="1">
-      <BsFileText /> <Text>{name}</Text>
-    </HStack>
-  );
-};
+// const File = ({ name }: any) => {
+//   return (
+//     <HStack pt="1">
+//       <BsFileText /> <Text>{name}</Text>
+//     </HStack>
+//   );
+// };
 
 const MotionBox = chakra(motion.div, {
   /**
@@ -54,15 +55,13 @@ const MotionBox = chakra(motion.div, {
     isValidMotionProp(prop) || shouldForwardProp(prop),
 });
 
-const enterIntoFolder = () => {
-    
-}
+const enterIntoFolder = () => {};
 
 const Folder = ({ name }: any) => {
   const [HasSubFolder, setHasSubFolder] = useState(true);
   const [IsFolderOpen, setIsFolderOpen] = useState(false);
   return (
-    <Box onDoubleClick={e => enterIntoFolder()}>
+    <Box onDoubleClick={(e) => enterIntoFolder()}>
       <Box>
         <HStack
           onClick={(e) => {
@@ -86,13 +85,13 @@ const Folder = ({ name }: any) => {
                   duration: 0.3,
                 }}
               >
-                <AiOutlineDown />
+                {/* <AiOutlineDown /> */}
               </MotionBox>
             ) : null}
           </Box>
         </HStack>
       </Box>
-      {IsFolderOpen ? (
+      {/* {IsFolderOpen ? (
         <MotionBox
           animate={{ x: 15 }}
           //   @ts-ignore no problem in operation, although type error appears.
@@ -101,18 +100,18 @@ const Folder = ({ name }: any) => {
           <Box>
             <UnorderedList ml="9">
               <ListItem listStyleType={"none"}>
-                <File name="file 01" />
-              </ListItem>
-              <ListItem listStyleType={"none"}>
-                <File name="file 01" />
-              </ListItem>
-              <ListItem listStyleType={"none"}>
-                <File name="file 01" />
-              </ListItem>
-            </UnorderedList>
-          </Box>
-        </MotionBox>
-      ) : null}
+                {/* <File name="file 01" /> */}
+      {/* </ListItem> */}
+      {/* <ListItem listStyleType={"none"}> */}
+      {/* <File name="file 01" /> */}
+      {/* </ListItem> */}
+      {/* // <ListItem listStyleType={"none"}> */}
+      {/* <File name="file 01" /> */}
+      {/* </ListItem> */}
+      {/* </UnorderedList> */}
+      {/* </Box> */}
+      {/* </MotionBox > */}
+      {/* ) : null} */}
     </Box>
   );
 };

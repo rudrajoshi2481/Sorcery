@@ -39,7 +39,9 @@ import Axios from "axios";
 import { useQuery } from "react-query";
 import { UserContext } from "@/context/Usercontext";
 import { AiOutlineSetting, AiOutlineDelete } from "react-icons/ai";
+import { ProjectContext, ProjectContextProvider } from "@/context/ProjectWorkingContext";
 function ProjectId() {
+  const [ProjectData, setProjectData]:any = useContext(ProjectContext);
   const [IsUserLogedIn, setIsUserLogedIn] = useState(true);
   const [Data, setData]: any = useState();
   
@@ -61,19 +63,23 @@ function ProjectId() {
     }).then((res) => {
       // console.log(res.data.doc);
       setData(res.data.doc);
+      setProjectData(res.data.doc)
     });
     checkStatus();
   }, []);
-
+  
   
   let date = new Date(Data?.createdAt).toLocaleString();
   let lastOnline = new Date(Data?.lastOnline).toLocaleString();
-
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
+  
+
 
   return (
-    <>
+    
+      <>
       {IsUserLogedIn ? (
         <>
           <Box>
@@ -122,6 +128,7 @@ function ProjectId() {
         <LoginRequired />
       )}
     </>
+    
   );
 }
 

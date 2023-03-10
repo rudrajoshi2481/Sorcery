@@ -1,6 +1,8 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Checkbox, HStack, Text } from "@chakra-ui/react";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Checkbox, HStack, Text } from "@chakra-ui/react";
+import CreateNewSession from "../logic/CreateNewSession";
 
 const BreadcrumbPaths = () => {
+  
     return (
       <HStack justifyContent={"space-between"}>
         <Box display={"flex"} alignItems="center">
@@ -23,6 +25,7 @@ const BreadcrumbPaths = () => {
           </Breadcrumb>
         </Box>
         </Box>
+        <CreateNewSession />
         <Box>
             <HStack>
             <Text color={"green.400"} mr="6">Loading ...</Text>
@@ -32,6 +35,8 @@ const BreadcrumbPaths = () => {
       </HStack>
     );
   };
+
+  
 
 export default BreadcrumbPaths
   

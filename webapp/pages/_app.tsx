@@ -7,11 +7,15 @@ import "../styles/globals.css"
 import { QueryClientProvider } from "react-query";
 import { QueryClient } from "react-query";
 import { UserContextProvider } from "@/context/Usercontext";
+import { ProjectContextProvider } from "@/context/ProjectWorkingContext";
 
 const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
   return (<UserContextProvider>
+
+    <ProjectContextProvider>
+      
     
     
     <ChakraProvider>
@@ -52,5 +56,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </ QueryClientProvider>
     </ChakraProvider>
   
+  
+    </ProjectContextProvider>
   </UserContextProvider>);
 }

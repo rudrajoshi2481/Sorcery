@@ -26,6 +26,7 @@ app.use("/dock", AuthMiddleware, require("./routes/docking"));
 
 
 app.use("/auth", require("./routes/login"));
+app.use("/session", require("./routes/sessionRelated/createSessions"));
 
 
 

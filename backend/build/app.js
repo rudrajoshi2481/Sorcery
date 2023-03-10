@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 });
 app.use("/dock", AuthMiddleware, require("./routes/docking"));
 app.use("/auth", require("./routes/login"));
+app.use("/session", require("./routes/sessionRelated/createSessions"));
 app.listen(2000, () => {
     console.log("App started on 2000");
 });

@@ -2,7 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 
 import React, { useEffect, useState,useRef } from "react";
 
-function Playground() {
+function Playground({showControls}:any) {
 
 
   const [ShowPlayGorund, setShowPlayGorund] = useState(false)
@@ -12,13 +12,10 @@ function Playground() {
   },[])
 
   return (
-    <Box>
-      <Text>Playgroung</Text>
-
-     
+    <Box>     
       {
         ShowPlayGorund ? <Box mb="16" height={"700"} position="relative">
-        <Fold  molecule-id="7aad"  bg-color-r="255" bg-color-g="255" bg-color-b="255" landscape="true" validation-annotation="false"/>
+        <Fold  molecule-id="7aad"  bg-color-r="255" bg-color-g="255" bg-color-b="255" landscape="true" validation-annotation="false" hide-controls={showControls ? "true" : "false"}/>
         </Box> : null
       }
     </Box>

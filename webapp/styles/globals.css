@@ -17,6 +17,33 @@
   font-family: "Noto Serif", serif !important;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background:  ; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:green;
+  
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkgreen;
+}
+
+:root{
+  overflow-x: hidden;
+}
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;

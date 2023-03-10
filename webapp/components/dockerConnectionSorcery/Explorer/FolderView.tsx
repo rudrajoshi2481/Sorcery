@@ -7,25 +7,13 @@ const FolderView = () => {
 
   return (
     <Box onContextMenu={handleClick} display={"flex"} flexWrap="wrap" px="6">
-      <FolderCard />
-      <FolderCard />
-      <FileCard />
-      <FolderCard />
-      <FolderCard />
-      <FolderCard />
-      <FolderCard />
-      <FolderCard />
-      <FolderCard />
-      <FileCard />
-      <FileCard />
-      <FileCard />
-      <FileCard />
-      <FileCard />
+      <FolderCard name={"based on olaparib"} />
+      
     </Box>
   );
 };
 
-const FolderCard = () => {
+const FolderCard = ({name}:any) => {
   return (
     <>
       <Card
@@ -33,7 +21,7 @@ const FolderCard = () => {
         m="3"
         minW={"250"}
         border="1px solid gray"
-        bgColor={"teal.100"}
+        bgColor={"green.100"}
       >
         <CardHeader>
           <HStack justifyContent={"flex-start"} alignItems="flex-start">
@@ -41,8 +29,10 @@ const FolderCard = () => {
               <BsFolder2 />
             </Text>
           <VStack justifyContent={"flex-start"} alignItems="flex-start" pl="6">
-            <Text fontSize={"lg"}>Work 03</Text>
+            <Text fontSize={"lg"}>{name}</Text>
             <HStack><Text>Created At :</Text><Text> 08/04/2001</Text></HStack>
+            <HStack><Text>status :</Text><Text> running</Text></HStack>
+            
           </VStack>
           </HStack>
         </CardHeader>

@@ -7,6 +7,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Tabs,
   Text,
   Tooltip,
   useToast,
@@ -36,6 +37,7 @@ function Login() {
     </Container>
   );
 }
+
 
 const Form = () => {
   const [Email, setEmail] = useState("");

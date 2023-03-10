@@ -15,6 +15,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import LOGO from "../../public/logo.svg";
 import { getToken } from "../logic/cookie";
+import { useMediaQuery } from '@chakra-ui/react'
 function Navbar() {
   const [ShowLogin, setShowLogin] = useState(false);
   useEffect(() => {
@@ -36,7 +37,7 @@ function Navbar() {
         {
           name: "SorceryBook",
           icons: "",
-          link: "/#",
+          link: "/sorcerybook",
           description: "version control for yours latest Sorcery",
         },
         {
@@ -65,7 +66,29 @@ function Navbar() {
         },
       ],
     },
+    {
+      name: "Authors 😄",
+      sublinks: [
+        {
+          name: "Rudra Joshi",
+          icons: "",
+          link: "https://rudrajoshi.me",
+          description:
+            "Passionate, curious, exciting ...",
+        },
+        {
+          name: "Ankita mam",
+          icons: "",
+          link: "/#",
+          description: "Case study on Automation on Autodock using julia",
+        },
+      ],
+    },
   ];
+
+  // single media query with no options
+const [isLargerThan800] = useMediaQuery('(min-width: 800px)')
+
   return (
     <>
       {ShowLogin ? (
@@ -101,12 +124,14 @@ function Navbar() {
               <Image src={"./logo.svg"} width="60" height="60" alt={"logo"} />
             </Link>
           </Box>
-
+        {
+          isLargerThan800 ? 
           <UnorderedList display={"flex"}>
             {listItem.map((item) => {
               return <ListItemComponent item={item} />;
             })}
-          </UnorderedList>
+          </UnorderedList> : null
+        }
         </Box>
         {/* Righ Hand side */}
         <Box>
@@ -158,7 +183,7 @@ const SubLinkComponent = ({ sublinks }: any) => {
       bg={"white"}
       maxH={"250"}
       py="3"
-      borderRadius={"10"}
+      // borderRadius={"10"}
     >
       <Box borderRight={"1px solid grey"}>
         <UnorderedList display={"flex"} flexDir="column">
