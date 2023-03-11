@@ -9,16 +9,14 @@ import { QueryClient } from "react-query";
 import { UserContextProvider } from "@/context/Usercontext";
 import { ProjectContextProvider } from "@/context/ProjectWorkingContext";
 import Footer from "@/components/Footer/Footer";
+import { Suspense } from "react";
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <ProjectContextProvider>
-        <ChakraProvider>
-          <QueryClientProvider client={queryClient}>
-            <Head>
+       <Head>
               <link rel="icon" href="./logo.svg" />
               <link rel="preconnect" href="https://fonts.googleapis.com" />
               <link
@@ -66,8 +64,14 @@ export default function App({ Component, pageProps }: AppProps) {
                 src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"
               ></script>
             </Head>
+      <ProjectContextProvider>
+        <ChakraProvider>
+          <QueryClientProvider client={queryClient}>
+           
+          <Suspense fallback="loading">
           <Navbar />
           <Component {...pageProps} />
+          </Suspense>
           {/* <Footer /> */}
           </QueryClientProvider>
         </ChakraProvider>

@@ -31,7 +31,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Playground from "@/components/dashboard/panels/Playground";
@@ -41,6 +41,7 @@ function Index({ props }: any) {
   const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
   return (
     <Box>
+      <Suspense fallback="loading">
       <Container maxW={"container.xl"}>
         <HStack
           justifyContent={"space-between"}
@@ -70,12 +71,15 @@ function Index({ props }: any) {
         <Heading className="title" pb="6">
           Playground
         </Heading>
+        <Suspense fallback="loading">
         <Playground showControls={isLargerThan800} />
+          </Suspense>
         <Divider />
         <FeedBackForm />
         <FeedbackDatabase />
       </Container>
       <Footer />
+      </Suspense>
     </Box>
   );
 }
@@ -181,70 +185,7 @@ const FeedbackDatabase = () => {
             consectetur amet fugiat velit duis.
           </Text>
         </Box>
-        <Box
-          minW={"300"}
-          p="6"
-          m="6"
-          boxShadow="lg"
-          rounded="md"
-          bg="white"
-          maxW={"320"}
-          border={"1px solid green"}
-        >
-          <Text py="2">@ rudrajoshi</Text>
-          <Text>
-            Irure nostrud nisi voluptate qui do consectetur aute cupidatat
-            consectetur amet fugiat velit duis.
-          </Text>
-        </Box>
-        <Box
-          minW={"300"}
-          p="6"
-          m="6"
-          boxShadow="lg"
-          rounded="md"
-          bg="white"
-          maxW={"320"}
-          border={"1px solid green"}
-        >
-          <Text py="2">@ rudrajoshi</Text>
-          <Text>
-            Irure nostrud nisi voluptate qui do consectetur aute cupidatat
-            consectetur amet fugiat velit duis.
-          </Text>
-        </Box>
-        <Box
-          minW={"300"}
-          p="6"
-          m="6"
-          boxShadow="lg"
-          rounded="md"
-          bg="white"
-          maxW={"320"}
-          border={"1px solid green"}
-        >
-          <Text py="2">@ rudrajoshi</Text>
-          <Text>
-            Irure nostrud nisi voluptate qui do consectetur aute cupidatat
-            consectetur amet fugiat velit duis.
-          </Text>
-        </Box>
-        <Box
-          minW={"300"}
-          p="6"
-          m="6"
-          boxShadow="lg"
-          rounded="md"
-          bg="white"
-          maxW={"320"}
-          border={"1px solid green"}
-        >
-          <Text py="2">@ rudrajoshi</Text>
-          <Text>
-            Irure nostrud nisi voluptate qui do consectetur aute cupidatat
-            consectetur amet fugiat velit duis.
-          </Text>
-        </Box>
+        
       </Flex>
     </Box>
   );
@@ -266,21 +207,21 @@ const Traffics = () => {
       rounded="md"
       bg="white"
       style={{ marginRight: "10vw" }}
-      fontSize="2xl"
+      // fontSize=""
     >
       <Box px="2">
-        <FormLabel fontSize={"xl"}>Visits</FormLabel>
+        <FormLabel >Visits</FormLabel>
         <Heading className="title" color={"green.400"}>
           200
         </Heading>
       </Box>
 
       <Box px="2">
-        <FormLabel fontSize={"xl"}>Users</FormLabel>
+        <FormLabel >Users</FormLabel>
         <Heading className="title">200</Heading>
       </Box>
       <Box px="2">
-        <FormLabel fontSize={"xl"}>Docked</FormLabel>
+        <FormLabel >Docked</FormLabel>
         <Heading className="title">200</Heading>
       </Box>
     </Box>
