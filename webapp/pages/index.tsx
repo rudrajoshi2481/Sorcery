@@ -256,10 +256,11 @@ const Traffics = () => {
   
   return (
     <Box
+    className="thirteen"
       display={"flex"}
       flexWrap="wrap"
       p="9"
-      className="title"
+      
       border={"1px solid black"}
       boxShadow="lg"
       rounded="md"

@@ -12,7 +12,7 @@ const sessionSchema = new Schema({
     projectId:{
         type:String,
         require:true,
-        unique:true
+        
     },
     description:{
         type:String,

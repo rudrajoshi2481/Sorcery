@@ -8,13 +8,11 @@ import {
 } from "@chakra-ui/react";
 import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import Explorer from "./Explorer/Explorer";
-import { QueryClient, QueryClientProvider } from "react-query";
-const queryClient = new QueryClient()
  
 function Index() {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
+      
       <Box>
         <Text>⭐ soul purpose of this container is to perform docking</Text>
         <HStack>
@@ -23,7 +21,7 @@ function Index() {
         </HStack>
         <Explorer />
       </Box>
-      </QueryClientProvider>
+      
     </>
   );
 }

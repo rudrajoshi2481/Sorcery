@@ -34,7 +34,6 @@ const sessionSchema = new mongoose_1.Schema({
     projectId: {
         type: String,
         require: true,
-        unique: true
     },
     description: {
         type: String,

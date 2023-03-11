@@ -7,33 +7,38 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsFileText, BsFolder2 } from "react-icons/bs";
 import { AiOutlineDown } from "react-icons/ai";
 import { isValidMotionProp, motion } from "framer-motion";
+import { ProjectContext } from "@/context/ProjectWorkingContext";
 const FileTree = () => {
-  const [SessionsList, setSessionsList] = useState([]);
+  
+  const [ProjectData, setProjectData]: any = useContext(ProjectContext);
+  const [ShowFileTree, setShowFileTree] = useState(false)
+
+  useEffect(() => {
+    if (ProjectData?.sessions?.data?.docs.length >= 0) {
+        setShowFileTree(true)
+    }
+  })
 
   return (
     <Box minH={"300"} pr="6">
       <Text fontWeight={"bold"}>All Sessions</Text>
       <UnorderedList minW={"300"}>
-        {SessionsList.length <= 0 ? (
-          <Text color={"tomato"}>No Sessions found</Text>
-        ) : (
-          <>
-            {" "}
-            <ListItem listStyleType={"none"} p="1" px="3">
-              <Folder name="Olaparib base" />
-            </ListItem>
-            <ListItem listStyleType={"none"} p="1" px="3">
-              <Folder name="flavonoid based" />
-            </ListItem>
-            <ListItem listStyleType={"none"} p="1" px="3">
-              <Folder name="work 01" />
-            </ListItem>
-          </>
-        )}
+        {
+        ProjectData.sessions ? ProjectData.sessions.docs.map((e:any) => {
+            return (
+              <>
+                <ListItem listStyleType={"none"} p="1" px="3">
+              <Folder name={e.sessionName} />
+            </ListItem>  
+              </>
+            )
+          }):null
+        }
+      
       </UnorderedList>
     </Box>
   );

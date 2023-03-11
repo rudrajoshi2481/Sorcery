@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 const { AuthMiddleware } = require("./middleware/authmiddleware");
 
 mongoose
-  .connect("mongodb://localhost:9000/sorcery")
+  // .connect("mongodb://localhost:9000/sorcery")
+  .connect("mongodb+srv://rudra:rudra@cluster0.2dlvbei.mongodb.net/?retryWrites=true&w=majority")
   .then((res) => {
     console.log("Connected to database");
   })
@@ -27,6 +28,7 @@ app.use("/dock", AuthMiddleware, require("./routes/docking"));
 
 app.use("/auth", require("./routes/login"));
 app.use("/session", require("./routes/sessionRelated/createSessions"));
+app.use("/session", require("./routes/sessionRelated/getallsessions"));
 
 
 

@@ -8,7 +8,8 @@ const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const { AuthMiddleware } = require("./middleware/authmiddleware");
 mongoose_1.default
-    .connect("mongodb://localhost:9000/sorcery")
+    // .connect("mongodb://localhost:9000/sorcery")
+    .connect("mongodb+srv://rudra:rudra@cluster0.2dlvbei.mongodb.net/?retryWrites=true&w=majority")
     .then((res) => {
     console.log("Connected to database");
 })
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/dock", AuthMiddleware, require("./routes/docking"));
 app.use("/auth", require("./routes/login"));
 app.use("/session", require("./routes/sessionRelated/createSessions"));
+app.use("/session", require("./routes/sessionRelated/getallsessions"));
 app.listen(2000, () => {
     console.log("App started on 2000");
 });

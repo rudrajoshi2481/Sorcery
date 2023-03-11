@@ -113,7 +113,7 @@ function ProjectId() {
                 <ProjectDeleteDialog
                   isOpen={isOpen}
                   projectId={Data?._id}
-                  title={UserData.title}
+                  title={UserData?.title}
                   onOpen={onOpen}
                   data={UserData}
                   onClose={onClose}

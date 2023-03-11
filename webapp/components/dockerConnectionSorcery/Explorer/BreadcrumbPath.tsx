@@ -1,5 +1,6 @@
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Checkbox, HStack, Text } from "@chakra-ui/react";
 import CreateNewSession from "../logic/CreateNewSession";
+import DeleteSession from "../logic/DeleteSession";
 
 const BreadcrumbPaths = () => {
   
@@ -12,7 +13,7 @@ const BreadcrumbPaths = () => {
         <Box>
           <Breadcrumb fontWeight="medium" fontSize="sm">
             <BreadcrumbItem>
-              <BreadcrumbLink href="#">Home</BreadcrumbLink>
+              <BreadcrumbLink href="#">All Sessions</BreadcrumbLink>
             </BreadcrumbItem>
   
             <BreadcrumbItem>
@@ -25,7 +26,10 @@ const BreadcrumbPaths = () => {
           </Breadcrumb>
         </Box>
         </Box>
+        <Box display={"flex"}>
         <CreateNewSession />
+        {/* <DeleteSession /> */}
+        </Box>
         <Box>
             <HStack>
             <Text color={"green.400"} mr="6">Loading ...</Text>
