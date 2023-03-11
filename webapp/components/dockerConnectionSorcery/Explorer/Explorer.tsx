@@ -24,8 +24,11 @@ const Explorer = () => {
           projectId: ProjectData._id,
         })
         .then((res) => {
-          setProjectData({ ...ProjectData, sessions: res.data });
-          return res.data;
+          if (res.data.status != 400) {
+            setProjectData({ ...ProjectData, sessions: res.data });
+            return res.data;
+            
+          }
         }),
     { refetchInterval: 5000 }
   );

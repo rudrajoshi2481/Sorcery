@@ -25,6 +25,7 @@ import {
   Skeleton,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -33,27 +34,51 @@ import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 // fetch all projects
 
-
-
 function Docking() {
   const [UserData, setUserData]: any = useContext(UserContext);
-
+  const [ProjectList, setProjectList]: any = useState(null);
   // const {uuid,token} = getToken()
-
-  const { isLoading, error, data, isError } = useQuery("projects", () =>
-    axios.post(getallprojectslist, {
-      token: UserData.token,
-      uuid: UserData.uuid,
-    })
-  );
+  const toast = useToast()
 
   const [IsUserLogedIn, setIsUserLogedIn] = useState(false);
+  const [IsLoading, setIsLoading] = useState(false);
 
+  //   const { isLoading, error, data, isError } = useQuery("projects", () =>
+  //   axios.post(getallprojectslist, {
+  //     token: UserData.token,
+  //     uuid: UserData.uuid,
+  //   }).then(res => {
+  //     setIsLoading(false)
+  //     setProjectList(res.data)
+  //   }),{refetchInterval:5000},
+  // );
   useEffect(() => {
+    setIsLoading(true);
     if (getToken()) {
       setIsUserLogedIn(true);
     }
-  }, []);
+    
+    if ( IsUserLogedIn ) {
+      axios
+        .post(getallprojectslist, {
+          token: UserData.token,
+          uuid: UserData.uuid,
+        })
+        .then((res: any) => {
+          toast({
+            title:"Done 👍",
+
+          })
+          setIsLoading(false);
+          setProjectList(res.data);
+        }).catch(err => {
+          toast({
+            title:"Faced Fetching Error",
+
+          })
+        });
+    }
+  }, [UserData]);
 
   return (
     <>
@@ -76,13 +101,13 @@ function Docking() {
               </Link>
             </Box>
 
-            {!true ? (
+            {IsLoading ? (
               <LoadingProjects />
             ) : (
               <Flex flexWrap={"wrap"}>
-                {data?.data.status != 400 ? (
+                {ProjectList.status != 400 ? (
                   <>
-                    {data?.data.docs.map((e: any) => {
+                    {ProjectList.docs.map((e: any) => {
                       return (
                         <ProjectsCards
                           projectId={e._id}
@@ -148,10 +173,9 @@ function ProjectsCards({ projectId, description, title, createdAt }: any) {
           <CardBody display={"flex"} flexDir="column">
             <Box>
               <HStack>
-              <Heading>{title}</Heading>
-             
+                <Heading>{title}</Heading>
               </HStack>
-              <Text  py="3" color="grey">
+              <Text py="3" color="grey">
                 {description}
               </Text>
             </Box>

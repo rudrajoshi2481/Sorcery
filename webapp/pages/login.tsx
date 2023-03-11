@@ -21,8 +21,12 @@ import IsStrongPassword from "validator/lib/isStrongPassword";
 import { getToken, logOut, saveToken } from "@/components/logic/cookie";
 import { createuser, loginuser } from "@/components/config/backendLinks";
 import { UserContext } from "@/context/Usercontext";
+import { useRouter } from "next/router";
 
 function Login() {
+  
+const [UserData, setUserData]:any = React.useContext(UserContext);
+const route = useRouter()
   return (
     <Container
       display={"flex"}
@@ -33,7 +37,12 @@ function Login() {
       <Box mb="6">
         <Image src="./logo.svg" width="100" height={"100"} alt="logo" />
       </Box>
-      <Form />
+      {
+        !UserData?.email ? <Form /> : <Button colorScheme="red" my="9"                 onClick={(e) => {
+          logOut();
+          route.reload();
+        }}>Logout from {UserData.email}</Button>
+      }
     </Container>
   );
 }
@@ -50,33 +59,32 @@ const Form = () => {
 
   const toast = useToast() 
 
+  const router = useRouter()
   const SubmitData = (e:any) => {
     e.preventDefault()
     setIsLoading(true)
-    const token = getToken()
+    // const token = getToken()
     setWarningPassword("")
     setWarningEmail("")
+    
 
     if (!IsEmail(Email)) {
       setIsLoading(false) 
       return setWarningEmail("Email Invalid");
     }
 
-    // if (!IsStrongPassword(password)) {
-    //   return setWarningPassword("Set Strong Password");
-    // }
-
-    Axios.post(createuser,{email:Email,password:password,token}).then(doc => {
+    Axios.post(createuser,{email:Email,password:password}).then(doc => {
       console.log(doc);
       if (doc.data.status != 400) {
         saveToken(doc.data)
-        
+        // setUserData(doc.data)
         toast({
           title:"Account Created 😀",
           isClosable:true,
           duration:9000,
           status:"success"
         })
+        router.reload()
       }else{
         toast({
           title:"Facing problems to Create account 😭",
@@ -101,7 +109,8 @@ const Form = () => {
   const LoginUser = (e:any) => {
     e.preventDefault()
     setIsLoading(true)
-    const token = getToken()
+    const router = useRouter()
+     // const token = getToken()
     setWarningPassword("")
     setWarningEmail("")
 
@@ -114,16 +123,18 @@ const Form = () => {
     //   return setWarningPassword("Set Strong Password");
     // }
 
-    Axios.post(loginuser,{email:Email,password:password,token}).then(doc => {
+    Axios.post(loginuser,{email:Email,password:password}).then(doc => {
       console.log(doc);
       if (doc.data.status != 400) {
-        saveToken(doc.data.token)
+        saveToken(doc.data)
+        // setUserData(doc.data)
         toast({
           title:"you are logged in 😀",
           isClosable:true,
           duration:9000,
           status:"success"
         })
+        router.reload()
       }else{
         toast({
           title:"Facing problems to Create account 😭",

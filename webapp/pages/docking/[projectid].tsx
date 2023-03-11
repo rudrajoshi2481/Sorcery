@@ -39,12 +39,15 @@ import Axios from "axios";
 import { useQuery } from "react-query";
 import { UserContext } from "@/context/Usercontext";
 import { AiOutlineSetting, AiOutlineDelete } from "react-icons/ai";
-import { ProjectContext, ProjectContextProvider } from "@/context/ProjectWorkingContext";
+import {
+  ProjectContext,
+  ProjectContextProvider,
+} from "@/context/ProjectWorkingContext";
 function ProjectId() {
-  const [ProjectData, setProjectData]:any = useContext(ProjectContext);
+  const [ProjectData, setProjectData]: any = useContext(ProjectContext);
   const [IsUserLogedIn, setIsUserLogedIn] = useState(true);
   const [Data, setData]: any = useState();
-  
+
   const router = useRouter();
   const [UserData, setUserData]: any = useContext(UserContext);
 
@@ -57,78 +60,88 @@ function ProjectId() {
       }
     };
 
-    Axios.post(getoneproject, {
-      token: UserData.token,
-      projectId: router.query.projectid,
-    }).then((res) => {
-      // console.log(res.data.doc);
-      setData(res.data.doc);
-      setProjectData(res.data.doc)
-    });
+    if (IsUserLogedIn && UserData) {
+      Axios.post(getoneproject, {
+        token: UserData.token,
+        projectId: router.query.projectid,
+      }).then((res) => {
+        // console.log(res.data.doc);
+
+        if (res.data.status != 400) {
+          setData(res.data.doc);
+          setProjectData(res.data.doc);
+        }
+      });
+    }
+
     checkStatus();
-  }, []);
-  
-  
+  }, [UserData]);
+
   let date = new Date(Data?.createdAt).toLocaleString();
   let lastOnline = new Date(Data?.lastOnline).toLocaleString();
-  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  
-
 
   return (
-    
-      <>
+    <>
       {IsUserLogedIn ? (
         <>
-          <Box>
-            <HStack mx="9" justifyContent={"space-between"}>
-              <RoutingBar
-                title={Data?.title}
-                createdAt={date}
-                body={Data?.body}
-                description={Data?.description}
-                lastOnline={lastOnline}
-              />
-              <Box>
-                <Menu>
-                  <MenuButton
-                    as={IconButton}
-                    aria-label="Options"
-                    icon={<AiOutlineSetting />}
-                    variant="outline"
-                  />
-                  <MenuList>
-                    <MenuItem
-                      onClick={onOpen}
-                      color={"tomato"}
-                      icon={<AiOutlineDelete />}
-                      command="⌘T"
-                    >
-                      Delete Project
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-                <ProjectDeleteDialog
-                  isOpen={isOpen}
-                  projectId={Data?._id}
-                  title={UserData?.title}
-                  onOpen={onOpen}
-                  data={UserData}
-                  onClose={onClose}
-                  cancelRef={cancelRef}
+          {ProjectData.sessions != false ? (
+            <Box>
+              <HStack mx="9" justifyContent={"space-between"}>
+                <RoutingBar
+                  title={Data?.title}
+                  createdAt={date}
+                  body={Data?.body}
+                  description={Data?.description}
+                  lastOnline={lastOnline}
                 />
-              </Box>
-            </HStack>
-            <TabsPanelComponent data={Data} />
-          </Box>
+                <Box>
+                  <Menu>
+                    <MenuButton
+                      as={IconButton}
+                      aria-label="Options"
+                      icon={<AiOutlineSetting />}
+                      variant="outline"
+                    />
+                    <MenuList>
+                      <MenuItem
+                        onClick={onOpen}
+                        color={"tomato"}
+                        icon={<AiOutlineDelete />}
+                        command="⌘T"
+                      >
+                        Delete Project
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                  <ProjectDeleteDialog
+                    isOpen={isOpen}
+                    projectId={Data?._id}
+                    title={UserData?.title}
+                    onOpen={onOpen}
+                    data={UserData}
+                    onClose={onClose}
+                    cancelRef={cancelRef}
+                  />
+                </Box>
+              </HStack>
+              <TabsPanelComponent data={Data} />
+            </Box>
+          ) : (
+            <Box my="95">
+              <Heading textAlign={"center"} className="title">
+              Project Not found 🌴
+            </Heading>
+            <Text textAlign={"center"}>May be id is Invalid</Text>
+            </Box>
+          )}
         </>
       ) : (
         <LoginRequired />
       )}
     </>
-    
   );
 }
 
@@ -139,10 +152,10 @@ function ProjectDeleteDialog({
   cancelRef,
   title,
   projectId,
-  data
+  data,
 }: any) {
-  const toast = useToast()
-  const router = useRouter()
+  const toast = useToast();
+  const router = useRouter();
   const [UserData, setUserData]: any = useContext(UserContext);
   // const { isOpen, onOpen, onClose } = useDisclosure()
   // const cancelRef = React.useRef()
@@ -150,32 +163,33 @@ function ProjectDeleteDialog({
     Axios.post(deleteproject, {
       projectId: projectId,
       token: UserData.token,
-    }).then((res) => {
-      if (res.data.status === 400) {
+    })
+      .then((res) => {
+        if (res.data.status === 400) {
+          return toast({
+            title: "Faced problem deleting the project",
+            description: res.data.msg,
+            status: "error",
+            isClosable: true,
+          });
+        }
+        router.push("/docking");
         return toast({
-          title:"Faced problem deleting the project",
-          description:res.data.msg,
-          status:"error",
-          isClosable:true
-        })
-      }
-      router.push("/docking")
-      return toast({
-        title:"Deleted the project",
-        description:res.data.msg,
-        status:"success",
-        isClosable:true
+          title: "Deleted the project",
+          description: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
       })
-    }).catch(err => {
-      return toast({
-        title:"Server Error",
-        description:err,
-        status:"error",
-        isClosable:true
-      })
-    });
+      .catch((err) => {
+        return toast({
+          title: "Server Error",
+          description: err,
+          status: "error",
+          isClosable: true,
+        });
+      });
   };
-
 
   return (
     <>
@@ -254,7 +268,13 @@ const TabsPanelComponent = ({ data }: any) => {
   );
 };
 
-const RoutingBar = ({ title, body,createdAt, description, lastOnline }: any) => {
+const RoutingBar = ({
+  title,
+  body,
+  createdAt,
+  description,
+  lastOnline,
+}: any) => {
   const route = useRouter();
 
   return (

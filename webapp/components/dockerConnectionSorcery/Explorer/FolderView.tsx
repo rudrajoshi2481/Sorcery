@@ -6,19 +6,21 @@ const FolderView = () => {
   const handleClick = () => {
     console.log("Sidement");
   };
-
+const [ShowTree, setShowTree] = useState(false)
   const [ProjectData, setProjectData]: any = useContext(ProjectContext);
-  const [ShowFileTree, setShowFileTree] = useState(false)
+    useEffect(() => {
 
-  useEffect(() => {
-    if (ProjectData?.sessions?.data?.docs.length >= 0) {
-        setShowFileTree(true)
+    if (ProjectData.sessions) {
+        setShowTree(true)
     }
-  })
+
+  },[ProjectData])
   return (
     <Box onContextMenu={handleClick} display={"flex"} flexWrap="wrap" px="6">
-      {ProjectData.sessions ? (
-        <><FolderCardLoop data={ProjectData.sessions} />
+      {ShowTree ? (
+        <>
+        
+        <FolderCardLoop data={ProjectData.sessions} />
           </>
       ) : null}
     </Box>

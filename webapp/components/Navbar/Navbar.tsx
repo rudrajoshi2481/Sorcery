@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import LOGO from "../../public/logo.svg";
 import { getToken } from "../logic/cookie";
 import { useMediaQuery } from '@chakra-ui/react'
+import { UserContext } from "@/context/Usercontext";
 function Navbar() {
   const [ShowLogin, setShowLogin] = useState(false);
   useEffect(() => {
@@ -89,6 +90,8 @@ function Navbar() {
   // single media query with no options
 const [isLargerThan800] = useMediaQuery('(min-width: 800px)')
 
+const [UserData, setUserData]:any = React.useContext(UserContext);
+
   return (
     <>
       {ShowLogin ? (
@@ -98,7 +101,7 @@ const [isLargerThan800] = useMediaQuery('(min-width: 800px)')
           bgColor="green.400"
           textAlign={"center"}
         >
-          you are loged in
+          you are loged in as {UserData.email}
         </Box>
         <Box>
           

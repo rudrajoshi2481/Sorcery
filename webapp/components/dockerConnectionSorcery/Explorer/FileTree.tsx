@@ -1,6 +1,7 @@
 import {
   Box,
   chakra,
+  Divider,
   HStack,
   ListItem,
   shouldForwardProp,
@@ -12,35 +13,91 @@ import { BsFileText, BsFolder2 } from "react-icons/bs";
 import { AiOutlineDown } from "react-icons/ai";
 import { isValidMotionProp, motion } from "framer-motion";
 import { ProjectContext } from "@/context/ProjectWorkingContext";
-const FileTree = () => {
-  
-  const [ProjectData, setProjectData]: any = useContext(ProjectContext);
-  const [ShowFileTree, setShowFileTree] = useState(false)
+
+
+
+import React from 'react'
+
+function FileTree() {
+
+  const [ShowTree, setShowTree] = useState(false)
+    const [ProjectData, setProjectData]: any = useContext(ProjectContext);
+
 
   useEffect(() => {
-    if (ProjectData?.sessions?.data?.docs.length >= 0) {
-        setShowFileTree(true)
+
+    if (ProjectData.sessions != false ) {
+        setShowTree(true)
     }
-  })
+
+  },[ProjectData])
 
   return (
-    <Box minH={"300"} pr="6">
-      <Text fontWeight={"bold"}>All Sessions</Text>
-      <UnorderedList minW={"300"}>
-        {
-        ProjectData.sessions ? ProjectData.sessions.docs.map((e:any) => {
-            return (
-              <>
-                <ListItem listStyleType={"none"} p="1" px="3">
-              <Folder name={e.sessionName} />
-            </ListItem>  
-              </>
-            )
-          }):null
-        }
-      
-      </UnorderedList>
+    <Box>
+      {
+        ShowTree ?<Box minH={"300"} pr="6"> <UnorderedList minW={"300"}><FolderLoop data={ProjectData.sessions}/></UnorderedList></Box> : <Text>False</Text>
+      }
     </Box>
+  )
+}
+
+export default FileTree
+
+// const FileTree = () => {
+//   const [ProjectData, setProjectData]: any = useContext(ProjectContext);
+//   const [ShowFileTree, setShowFileTree] = useState(false);
+
+//   useEffect(() => {
+//     if (ProjectData?.sessions?.data?.docs.length >= 0) {
+//       setShowFileTree(true);
+//     }
+//   });
+
+//   return (
+//     <Box minH={"300"} pr="6">
+//       <Text fontWeight={"bold"}>All Sessions</Text>
+//       <UnorderedList minW={"300"}>
+//         {
+//           ProjectData.sessions.status != 400 ? (
+//             <>
+//               <FolderLoop data={ProjectData.sessions}/>
+//             </> 
+//           ): <Text>No Sessions Found</Text>
+//         }
+//       </UnorderedList>
+//     </Box>
+//   );
+// };
+
+const FolderLoop = ({ data }:any) => {
+  return (
+    <> 
+    {
+      // JSON.stringify(data.docs[0].sessionName)/
+    }
+{
+
+  data.docs.map((element:any) => {
+    return <>
+    <ListItem listStyleType={"none"} _hover={{color:"green.400"}} p="1" px="3">
+    <Folder name={element.sessionName} />
+    </ListItem>
+        </>
+  })
+  
+  // data.docs.map((e:any) => {
+  //   JSON.stringify(e)
+  // //   return (
+  // //     <>
+  // //     <ListItem listStyleType={"none"} p="1" px="3">
+  // //   <Folder name={e.sessionName} />
+  // // </ListItem>
+  // //     </>
+  // //   )
+  // })
+
+}
+    </>
   );
 };
 
@@ -75,7 +132,7 @@ const Folder = ({ name }: any) => {
           justifyContent={"space-between"}
           _hover={{ cursor: "grab" }}
         >
-          <HStack>
+          <HStack justifyContent={"flex-start"} alignItems="flex-start">
             <BsFolder2 /> <Text>{name}</Text>
           </HStack>
           <Box>
@@ -95,6 +152,7 @@ const Folder = ({ name }: any) => {
             ) : null}
           </Box>
         </HStack>
+        
       </Box>
       {/* {IsFolderOpen ? (
         <MotionBox
@@ -120,5 +178,3 @@ const Folder = ({ name }: any) => {
     </Box>
   );
 };
-
-export default FileTree;

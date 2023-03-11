@@ -25,8 +25,8 @@ const router = useRouter()
     description:"sowthing",
     share:"sowthing",
     body:"sowthing",
-    uuid:UserData?.uuid,
-    token:UserData?.token
+    uuid:UserData.uuid,
+    token:UserData.token
   })
 
 
