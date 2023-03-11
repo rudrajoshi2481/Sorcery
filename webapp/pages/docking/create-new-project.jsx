@@ -24,14 +24,14 @@ const router = useRouter()
     title:"sowthing",
     description:"sowthing",
     share:"sowthing",
-    body:"sowthing",
-    uuid:UserData?.uuid,
-    token:UserData.token
+    body:"sowthing"
   })
 
 
   const createProjectHandler = () => {
-    Axios.post(createdocproject,{...FormData}).then(doc => {
+    Axios.post(createdocproject,{...FormData,
+      uuid:UserData.uuid,
+      token:UserData.token}).then(doc => {
       console.log(doc,"Create Project");
       if (doc.data.status === 400) {
         return toast({
