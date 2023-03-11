@@ -1,57 +1,58 @@
-import { fireDB } from "@/components/config/fire"
-import {collection,addDoc,getDoc} from "firebase/firestore"
+// import { fireDB } from "@/components/config/fire"
+// import {collection,addDoc,getDoc} from "firebase/firestore"
 
 
-// check the cooke already present
+// // check the cooke already present
 
-const IsCookiePresent = () => {
-    return false
-}
+// const IsCookiePresent = () => {
+//     return false
+// }
 
 
-const NewVisitDocPresent = () => {
-    // getDocs(collection(fireDB,"analytics"))
-}
+// const NewVisitDocPresent = () => {
+//     // getDocs(collection(fireDB,"analytics"))
+// }
 
-const Newvisit = async () => {
-    // update count
+// const Newvisit = async () => {
+//     // update count
 
     
 
-    // get total visit
+//     // get total visit
 
 
 
 
-    // new visit
-    await addDoc(collection(fireDB,"analytics"),{
-        time:Date.now()
-    })
+//     // new visit
+//     await addDoc(collection(fireDB,"analytics"),{
+//         time:Date.now()
+//     })
 
-    // generate cookie
+//     // generate cookie
 
 
-    return true
+//     return true
     
-}
+// }
 
 
-const revisit = async() => {
-    return await addDoc(collection(fireDB,"revisit"),{
+// const revisit = async() => {
+//     return await addDoc(collection(fireDB,"revisit"),{
 
-    })
+//     })
     
-}
+// }
 
-const VisitEffect = () => {
+// const VisitEffect = () => {
 
-    if (!IsCookiePresent()) {
+//     if (!IsCookiePresent()) {
         
-    }else{
-        //update count 
-        //old visit
-    }
+//     }else{
+//         //update count 
+//         //old visit
+//     }
 
 
-}
+// }
 
+export const fireAuth = "getAuth(fireApp)";
