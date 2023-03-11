@@ -143,12 +143,13 @@ function Docking() {
 const LoadingProjects = () => {
   return (
     <Stack mt="9" maxW={"350"}>
+      <Heading>No Project Found</Heading>
+      {/* <Skeleton height="20px" />
       <Skeleton height="20px" />
       <Skeleton height="20px" />
       <Skeleton height="20px" />
       <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
+      <Skeleton height="20px" /> */}
     </Stack>
   );
 };
