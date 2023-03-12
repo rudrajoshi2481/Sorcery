@@ -124,17 +124,18 @@ const [UserData, setUserData]:any = React.useContext(UserContext);
         <Box display={"flex"} alignItems="center">
           <Box>
             <Link href="/">
-              <Image src={"./logo.svg"} width="60" height="60" alt={"logo"} />
+              <Image quality={"5"} src={"./logo.svg"} width="60" height="60" alt={"logo"} />
             </Link>
           </Box>
-        {
-          isLargerThan800 ? 
+        {/* {
+          isLargerThan800 ?  */}
           <UnorderedList display={"flex"}>
             {listItem.map((item) => {
               return <ListItemComponent item={item} />;
             })}
-          </UnorderedList> : null
-        }
+          </UnorderedList> 
+          {/* : null
+        } */}
         </Box>
         {/* Righ Hand side */}
         <Box>

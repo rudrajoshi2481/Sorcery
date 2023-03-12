@@ -2,11 +2,11 @@ import { verifyJSONToken, verifyUserUuidDatabase } from "./tokens";
 
 export const AuthMiddleware = async (req: any, res: any, next: any) => {
   // verify token
-  console.log("Something Happned in middleware");
+  // console.log("Something Happned in middleware");
   let tokenDecode:any = await verifyJSONToken(req.body.token);
 
-  console.log(tokenDecode.status,"this one");
-  console.log(tokenDecode.decode.data,"this one");
+  // console.log(tokenDecode.status,"this one");
+  // console.log(tokenDecode.decode.data,"this one");
   
   if (tokenDecode.status === 400) {
       console.log("👿 fail token 01");

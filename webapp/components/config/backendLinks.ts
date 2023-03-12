@@ -1,14 +1,15 @@
-import getConfig from 'next/config';
+// import getConfig from `next/config`;
 
+const baseUrl = `https://us-central1-jatan-development.cloudfunctions.net/api`
+// const baseUrl = `http://127.0.0.1:5001/jatan-development/us-central1/api`
 
-
-export const helloWorld = "http://localhost:2000/"
-// export const userlogin = "http://localhost:2000/auth/login"
-export const createuser = "http://localhost:2000/auth/createuser"
-export const loginuser = "http://localhost:2000/auth/loginuser"
-export const createdocproject = "http://localhost:2000/dock/createdocproject"
-export const getallprojectslist = "http://localhost:2000/dock/getallprojectslist"
-export const getoneproject = "http://localhost:2000/dock/getoneproject"
-export const deleteproject = "http://localhost:2000/dock/deleteproject"
-export const createsession = "http://localhost:2000/session/createsession"
-export const getallsession = "http://localhost:2000/session/getallsessions"
+export const helloWorld = `${baseUrl}`
+// export const userlogin = `${baseUrl}auth/login`
+export const createuser = `${baseUrl}/auth/createuser`
+export const loginuser = `${baseUrl}/auth/loginuser`
+export const createdocproject = `${baseUrl}/dock/createdocproject`
+export const getallprojectslist = `${baseUrl}/dock/getallprojectslist`
+export const getoneproject = `${baseUrl}/dock/getoneproject`
+export const deleteproject = `${baseUrl}/dock/deleteproject`
+export const createsession = `${baseUrl}/session/createsession`
+export const getallsession = `${baseUrl}/session/getallsessions`

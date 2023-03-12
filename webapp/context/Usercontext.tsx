@@ -13,7 +13,7 @@ export const UserContextProvider = (props: any) => {
 
   return (
     <UserContext.Provider value={[UserData, setUserData]}>
-        {/* <Text>Something {JSON.stringify(UserData)}</Text> */}
+        <Text>Something {JSON.stringify(UserData)}</Text>
       {props.children}
     </UserContext.Provider>
   );

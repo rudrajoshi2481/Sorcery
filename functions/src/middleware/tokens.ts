@@ -15,6 +15,8 @@ export const createJSONToken = (uuid: any) => {
 };
 
 export const verifyJSONToken = (token: any) => {
+  console.log("😀 verify json token ");
+  
   return jwt.verify(token, secret, (err: any, decode: any) => {
     if (err) return {status:400,decode};
     return {status:200,decode};

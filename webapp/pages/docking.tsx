@@ -3,6 +3,7 @@ import {
   helloWorld,
 } from "@/components/config/backendLinks";
 import LoginRequired from "@/components/ErrorStatus/LoginRequired";
+import { LoadingScreen } from "@/components/loading/Loading";
 import { getToken } from "@/components/logic/cookie";
 import { UserContext } from "@/context/Usercontext";
 import {
@@ -38,46 +39,34 @@ function Docking() {
   const [UserData, setUserData]: any = useContext(UserContext);
   const [ProjectList, setProjectList]: any = useState(null);
   // const {uuid,token} = getToken()
-  const toast = useToast()
+  const toast = useToast();
 
   const [IsUserLogedIn, setIsUserLogedIn] = useState(false);
-  const [IsLoading, setIsLoading] = useState(false);
+  const [IsLoading, setIsLoading] = useState(true);
 
-  //   const { isLoading, error, data, isError } = useQuery("projects", () =>
-  //   axios.post(getallprojectslist, {
-  //     token: UserData.token,
-  //     uuid: UserData.uuid,
-  //   }).then(res => {
-  //     setIsLoading(false)
-  //     setProjectList(res.data)
-  //   }),{refetchInterval:5000},
-  // );
-  useEffect(() => {
-    setIsLoading(true);
-    if (getToken()) {
-      setIsUserLogedIn(true);
-    }
-    
-    if ( IsUserLogedIn ) {
-      axios
-        .post(getallprojectslist, {
-          token: UserData.token,
-          uuid: UserData.uuid,
-        })
-        .then((res: any) => {
-          toast({
-            title:"Done 👍",
+  const FetchData = () => {
+    axios
+      .post(getallprojectslist, {
+        token: getToken().token,
+        uuid: getToken().uuid,
+      })
+      .then((res: any) => {
+        // console.log(res);
 
-          })
-          setIsLoading(false);
-          setProjectList(res.data);
-        }).catch(err => {
-          toast({
-            title:"Faced Fetching Error",
-
-          })
+        setProjectList(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        toast({
+          title: "Cannot connect to server",
         });
-    }
+      });
+  };
+
+  useEffect(() => {
+    getToken().token ? setIsUserLogedIn(true) : null
+    FetchData();
+    
   }, [UserData]);
 
   return (
@@ -101,11 +90,9 @@ function Docking() {
               </Link>
             </Box>
 
-            {IsLoading ? (
-              <LoadingProjects />
-            ) : (
               <Flex flexWrap={"wrap"}>
-                {ProjectList.status != 400 ? (
+                {/* {ProjectList.status != 400 && ProjectList.docs.length < 0 ? ( */}
+                {!IsLoading ? (
                   <>
                     {ProjectList.docs.map((e: any) => {
                       return (
@@ -130,7 +117,7 @@ function Docking() {
                   createdAt={"08/04/2001"}
                 /> */}
               </Flex>
-            )}
+            
           </Box>
         </Box>
       ) : (
@@ -139,20 +126,6 @@ function Docking() {
     </>
   );
 }
-
-const LoadingProjects = () => {
-  return (
-    <Stack mt="9" maxW={"350"}>
-      <Heading>No Project Found</Heading>
-      {/* <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" /> */}
-    </Stack>
-  );
-};
 
 function ProjectsCards({ projectId, description, title, createdAt }: any) {
   // let date = dayjs(createdAt,"MM-DD-YYYY")
