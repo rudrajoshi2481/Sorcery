@@ -64,8 +64,8 @@ function Docking() {
   };
 
   useEffect(() => {
-    getToken().token ? setIsUserLogedIn(true) : null
-    FetchData();
+    getToken()?.token ? () => {setIsUserLogedIn(true);FetchData();} : null
+    
     
   }, [UserData]);
 
