@@ -10,6 +10,12 @@ const userSchema = new Schema({
         type:String,
         require:true
     },
+    providerId:{
+        type:String,
+    },
+    displayName:{
+        type:String,
+    },
     uuid:{
         type:String,
         require:true,
@@ -22,3 +28,5 @@ const UserSchema = mongoose.model("users",userSchema)
 // module.exports = ProjectSchema
 
 export default UserSchema
+
+

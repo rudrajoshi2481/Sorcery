@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
 app.get("/", (req:any, res:any) => {
-  // console.log("Hello world");
+  console.log("Hello world");
 
   res.send("Hello my World,😘 !").status(200);
 });

@@ -5,7 +5,7 @@
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
     "allowSyntheticDefaultImports": false,
     
     "target": "es2017"

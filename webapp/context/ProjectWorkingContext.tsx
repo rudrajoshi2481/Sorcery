@@ -20,7 +20,7 @@ export const ProjectContextProvider = (props: any) => {
 
   return (
     <ProjectContext.Provider value={[ProjectData, setProjectData]}>
-      <Text>Something {JSON.stringify(ProjectData)}</Text>
+      {/* <Text>Something {JSON.stringify(ProjectData)}</Text> */}
       {props.children}
     </ProjectContext.Provider>
   );

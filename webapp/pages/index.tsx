@@ -3,6 +3,7 @@ import {
   loginuser,
   
 } from "@/components/config/backendLinks";
+import { AiFillStar} from "react-icons/ai"
 import Footer from "@/components/Footer/Footer";
 import { getToken, logOut, saveToken } from "@/components/logic/cookie";
 import {
@@ -36,12 +37,13 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Playground from "@/components/dashboard/panels/Playground";
 import Link from "next/link";
+import { LoadingScreen } from "@/components/loading/Loading";
 function Index({ props }: any) {
   // single media query with no options
   const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
   return (
     <Box>
-      <Suspense fallback="loading">
+      
       <Container maxW={"container.xl"}>
         <HStack
           justifyContent={"space-between"}
@@ -71,7 +73,7 @@ function Index({ props }: any) {
         <Heading className="title" pb="6">
           Playground
         </Heading>
-        <Suspense fallback="loading">
+        <Suspense fallback={<LoadingScreen />}>
         <Playground showControls={isLargerThan800} />
           </Suspense>
         <Divider />
@@ -79,7 +81,7 @@ function Index({ props }: any) {
         <FeedbackDatabase />
       </Container>
       <Footer />
-      </Suspense>
+      
     </Box>
   );
 }
@@ -130,13 +132,22 @@ const FeedBackForm = () => {
         <Box flex={"1"}>
           <FormLabel>Display Name :</FormLabel>
           <Input maxW={"620"} placeholder="rudrajoshi😀" />
+          <FormLabel>Email :</FormLabel>
+          <Input maxW={"620"} placeholder="rudrajoshi😀" />
 
           <FormLabel pt="6">Feedback :</FormLabel>
-          <Textarea
+          <HStack fontFamily={"6xl "}> 
+          <AiFillStar fontFamily={"xl"} style={{fontSize:"32px",color:"orange"}} />
+          <AiFillStar fontFamily={"xl"} style={{fontSize:"32px",color:"orange"}} />
+          <AiFillStar fontFamily={"xl"} style={{fontSize:"32px",color:"orange"}} />
+          <AiFillStar fontFamily={"xl"} style={{fontSize:"32px",color:"orange"}} />
+          <AiFillStar fontFamily={"xl"} style={{fontSize:"32px",color:"orange"}} />
+          </HStack>
+          {/* <Textarea
             maxW={"620"}
             rows={5}
             placeholder="i docked more than 500 molecule successfully just for fun 😑"
-          />
+          /> */}
           <HStack justifyContent={"flex-end"}>
             <Button my="3" colorScheme={"green"}>
               Submit

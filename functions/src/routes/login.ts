@@ -39,6 +39,61 @@ const Router = express.Router();
 //   }
 // });
 
+const IsExistingUser = async(email:any) => {
+  let status :any
+  await UserSchema.findOne({
+      email:email
+  }).then((doc:any) => {
+      if (!doc) {
+          status = false
+      } else{
+        status = true
+      }
+  });
+  
+  return  status
+}
+
+
+const saveUserInDatabase = async({ uid, email, providerId, displayName }:any) => {
+  
+  var array = [{uuid:uid, email, providerId, displayName }];
+  await UserSchema.create(
+      array
+  ).then((docs) => {
+      return {status:true,docs}
+    }).catch(err => {
+      
+      return {status:false,err}
+  });
+}
+
+Router.post("/providerauth",async(req,res) => {
+    console.log("😀 provider auth");
+
+    const { uid, email, providerId, displayName }:any = req.body
+
+    if (await !IsExistingUser(email)) {
+      let data:any = await saveUserInDatabase({uid, email, providerId, displayName}) 
+      if (data.status != 200) {
+          res.send({status:400,msg:"Faced some errors"})
+      }
+      res.send({status:200,msg:"Created Account"})
+    }else{
+      res.send({status:200,msg:"Logged in"})
+    }
+
+
+
+
+    
+
+
+
+})
+
+
+
 Router.post("/createuser", (req, res) => {
   console.log("Something happned", req.body);
 

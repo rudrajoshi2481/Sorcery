@@ -40,19 +40,20 @@ function Docking() {
   const [ProjectList, setProjectList]: any = useState(null);
   // const {uuid,token} = getToken()
   const toast = useToast();
-
+  
   const [IsUserLogedIn, setIsUserLogedIn] = useState(false);
   const [IsLoading, setIsLoading] = useState(true);
-
-  const FetchData = () => {
-    axios
+  
+  const FetchData = async () => {
+      
+      await axios
       .post(getallprojectslist, {
-        token: getToken().token,
-        uuid: getToken().uuid,
+        token: await getToken().token,
+        uuid: await getToken().uuid,
       })
       .then((res: any) => {
         // console.log(res);
-
+        
         setProjectList(res.data);
         setIsLoading(false);
       })
@@ -61,13 +62,15 @@ function Docking() {
           title: "Cannot connect to server",
         });
       });
-  };
+    };
+
+
 
   useEffect(() => {
-    getToken()?.token ? () => {setIsUserLogedIn(true);FetchData();} : null
-    
-    
-  }, [UserData]);
+    FetchData()
+  },[])
+
+
 
   return (
     <>
@@ -91,10 +94,10 @@ function Docking() {
             </Box>
 
               <Flex flexWrap={"wrap"}>
-                {/* {ProjectList.status != 400 && ProjectList.docs.length < 0 ? ( */}
-                {!IsLoading ? (
+                {ProjectList?.status != 400 && ProjectList?.docs?.length < 0 ? (
+                // {!IsLoading ? (
                   <>
-                    {ProjectList.docs.map((e: any) => {
+                    {ProjectList?.docs?.map((e: any) => {
                       return (
                         <ProjectsCards
                           projectId={e._id}
