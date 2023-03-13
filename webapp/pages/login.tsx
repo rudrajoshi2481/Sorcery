@@ -23,11 +23,11 @@ import { getToken, logOut, saveToken } from "@/components/logic/cookie";
 import { createuser, loginuser, providerauth } from "@/components/config/backendLinks";
 import { UserContext } from "@/context/Usercontext";
 import { useRouter } from "next/router";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  GithubAuthProvider,
-} from "firebase/auth";
+// import {
+//   GoogleAuthProvider,
+//   signInWithPopup,
+//   GithubAuthProvider,
+// } from "firebase/auth";
 // import { fireAuth } from "@/components/config/fire";
 import axios from "axios";
 
