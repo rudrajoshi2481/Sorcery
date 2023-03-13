@@ -223,17 +223,17 @@ const Traffics = () => {
       <Box px="2">
         <FormLabel >Visits</FormLabel>
         <Heading className="title" color={"green.400"}>
-          200
+          985
         </Heading>
       </Box>
 
       <Box px="2">
         <FormLabel >Users</FormLabel>
-        <Heading className="title">200</Heading>
+        <Heading className="title">35</Heading>
       </Box>
       <Box px="2">
         <FormLabel >Docked</FormLabel>
-        <Heading className="title">200</Heading>
+        <Heading className="title">952</Heading>
       </Box>
     </Box>
   );

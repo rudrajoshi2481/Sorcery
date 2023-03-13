@@ -1,7 +1,7 @@
 // import getConfig from `next/config`;
 
-// const baseUrl = `https://us-central1-jatan-development.cloudfunctions.net/api`
-const baseUrl = `http://127.0.0.1:5001/jatan-development/us-central1/api`
+const baseUrl = `https://us-central1-jatan-development.cloudfunctions.net/api`
+// const baseUrl = `http://127.0.0.1:5001/jatan-development/us-central1/api`
 
 export const helloWorld = `${baseUrl}`
 // export const userlogin = `${baseUrl}auth/login`
